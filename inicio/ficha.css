@@ -1,0 +1,61 @@
+body {
+  background: #ebdbc5;
+  font-family: 'Segoe UI', Arial, sans-serif;
+}
+#fichaEstudiante {
+  background:#f3d481;
+  border-radius: 10px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+  padding: 32px 24px;
+  margin: 40px auto;
+  max-width: 400px;
+  width: 100%;
+  box-sizing: border-box;
+}
+#fichaEstudiante h2 {
+  text-align: center;
+  color: #002C59;
+  margin-bottom: 24px;
+}
+#fichaEstudiante label {
+  display: block;
+  margin-bottom: 12px;
+  color: #8a3b08;
+  font-weight: 500;
+}
+#fichaEstudiante input {
+  width: 100%;
+  padding: 8px 10px;
+  margin-top: 4px;
+  border: 1px solid #b3c2e0;
+  border-radius: 5px;
+  font-size: 1em;
+  box-sizing: border-box;
+  transition: border-color 0.2s;
+}
+#fichaEstudiante input:focus {
+  border-color: #2a4d8f;
+  outline: none;
+}
+#fichaEstudiante button {
+  width: 48%;
+  padding: 10px 0;
+  margin: 12px 1%;
+  border: none;
+  border-radius: 5px;
+  background: #000000;
+  color: #6e6e6e;
+  font-size: 1em;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+#fichaEstudiante button[type="button"] {
+  background: #6e6e6e;
+  color: #000000;
+}
+#fichaEstudiante button:hover {
+  background: #6e6e6e;
+}
+#fichaEstudiante button[type="button"]:hover {
+  background: #000000;
+}
