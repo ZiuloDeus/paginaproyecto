@@ -54,7 +54,7 @@ header {
   color: #f3d481;
 }
 
-/* Menú desplegable usuario */
+
 .user-menu {
   position: absolute;
   top: 40px;
@@ -85,7 +85,6 @@ header {
   background-color: #e6be5a;
 }
 
-/* Sección central */
 main {
   flex: 1;
   display: flex;
@@ -140,7 +139,7 @@ main {
   color: #002C59;
 }
 
-/* Footer */
+
 footer {
   background-color: #002C59;
   color: white;
@@ -149,13 +148,13 @@ footer {
   margin-top: auto;
 }
 
-/* Animaciones */
+
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(-10px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* Responsive */
+
 @media screen and (max-width: 600px) {
   .icon-circle,
   .card {
