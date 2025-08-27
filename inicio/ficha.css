@@ -1,5 +1,7 @@
 body {
-  background: #ebdbc5;
+  background-image: url('itsp.jpg'); 
+  background-repeat: no-repeat;
+  background-size: cover;
   font-family: 'Segoe UI', Arial, sans-serif;
 }
 #fichaEstudiante {
