@@ -4,7 +4,7 @@ body {
   background-size: cover;
   font-family: 'Segoe UI', Arial, sans-serif;
 }
-#fichaEstudiante {
+#Registro {
   background:#f3d481;
   border-radius: 10px;
   box-shadow: 0 4px 16px #ebdbc5(0,0,0,0.08);
@@ -14,18 +14,18 @@ body {
   width: 100%;
   box-sizing: border-box;
 }
-#fichaEstudiante h2 {
+#Registro h2 {
   text-align: center;
   color: #002C59;
   margin-bottom: 24px;
 }
-#fichaEstudiante label {
+#Registro label {
   display: block;
   margin-bottom: 12px;
   color: #8a3b08;
   font-weight: 500;
 }
-#fichaEstudiante input {
+#Registro input {
   width: 100%;
   padding: 8px 10px;
   margin-top: 4px;
@@ -35,11 +35,11 @@ body {
   box-sizing: border-box;
   transition: border-color 0.2s;
 }
-#fichaEstudiante input:focus {
+#Registro input:focus {
   border-color: #2a4d8f;
   outline: none;
 }
-#fichaEstudiante button {
+#Registro button {
   width: 48%;
   padding: 10px 0;
   margin: 12px 1%;
@@ -51,13 +51,13 @@ body {
   cursor: pointer;
   transition: background 0.2s;
 }
-#fichaEstudiante button[type="button"] {
+#Registro button[type="button"] {
   background: #8a3b08;
   color: #ebdbc5;
 }
-#fichaEstudiante button:hover {
+#Registro button:hover {
   background: #8a3b08;
 }
-#fichaEstudiante button[type="button"]:hover {
+#Registro button[type="button"]:hover {
   background: #ebdbc5;
 }
