@@ -115,10 +115,24 @@ form.addEventListener('submit', function(e) {
     return;
   }
 
-  console.log('Enviando a la base de datos:', data);
-  alert('Registro enviado.');
-  form.reset();
-  seguridadMsg.textContent = '';
+  // Verificar si la cédula ya está registrada
+  if (localStorage.getItem(data.cedula)) {
+    alert('La cédula ya está registrada. Inicia sesión o usa otra.');
+    cedulaInput.focus();
+    return;
+  }
+
+  // Guardar usuario en localStorage
+  localStorage.setItem(data.cedula, JSON.stringify({
+    nombre: data.nombre,
+    apellido: data.apellido,
+    cedula: data.cedula,
+    password: data.password,
+    fechaNacimiento: data.fechaNacimiento
+  }));
+
+  alert('Registro exitoso. Ahora puedes iniciar sesión.');
+  window.location.href = '../inicio/inicio.html'; // Cambia la ruta si es necesario
 });
 
 document.getElementById('cancelarBtn').addEventListener('click', function() {
