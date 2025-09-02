@@ -6,11 +6,21 @@ document.body.innerHTML = `
     <button type="submit">Entrar</button>
     <button type="button" id="irRegistro">Registrarse</button>
   </form>
-  <div id="loginMsg" style="color:red;"></div>
+  <div id="loginMsg" class="hidden"></div>
 `;
 
 const loginForm = document.getElementById('Login');
 const loginMsg = document.getElementById('loginMsg');
+
+function showMessage(message, type) {
+  loginMsg.textContent = message;
+  loginMsg.className = 'loginMsg ${type}';
+  loginMsg.style.backgroundColor = type === 'success' ? 'green' : 'red';
+  loginMsg.classList.remove('hidden');
+  setTimeout(() => {
+    loginMsg.classList.add('hidden');
+  }, 10000); // Ocultar después de 10 segundos
+}
 
 loginForm.addEventListener('submit', function(e) {
   e.preventDefault();
@@ -19,15 +29,14 @@ loginForm.addEventListener('submit', function(e) {
   const usuario = JSON.parse(localStorage.getItem(cedula));
 
   if (!usuario) {
-    loginMsg.textContent = 'Usuario no registrado.';
+    showMessage('Usuario no registrado.' , 'error');
     return;
   }
   if (usuario.password !== password) {
-    loginMsg.textContent = 'Contraseña incorrecta.';
+    showMessage('Contraseña incorrecta.' , 'error');
     return;
   }
-  loginMsg.style.color = 'green';
-  loginMsg.textContent = '¡Inicio de sesión exitoso!';
+  showMessage('Inicio de sesión exitoso!' , 'success');
   // Aquí puedes redirigir o mostrar el contenido protegido
 });
 

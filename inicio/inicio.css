@@ -61,3 +61,18 @@ body {
 #Registro button[type="button"]:hover, #Login button[type="button"]:hover {
   background: #8a3b08;
 }
+
+.loginMsg {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 10px;
+  border-radius: 5px;
+  color: white;
+  display: inline-block;
+}
+
+.hidden {
+  display: none;
+}
