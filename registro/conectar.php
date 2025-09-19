@@ -15,5 +15,3 @@ function conectar_bd()
     echo "Conectado correctamente <hr>";
     return $conn;
 }
-
-$con = conectar_bd();
