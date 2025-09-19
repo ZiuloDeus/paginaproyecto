@@ -136,6 +136,5 @@ form.addEventListener('submit', function(e) {
 });
 
 document.getElementById('cancelarBtn').addEventListener('click', function() {
-  form.reset();
-  seguridadMsg.textContent = '';
+  window.location.href = '../inicio/inicio.html'; 
 });

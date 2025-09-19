@@ -12,3 +12,4 @@ document.getElementById("downBtn").addEventListener("click", () => {
     behavior: "smooth"
   });
 });
+

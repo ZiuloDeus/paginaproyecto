@@ -11,6 +11,17 @@ document.body.innerHTML = `
 
 const loginForm = document.getElementById('Login');
 const loginMsg = document.getElementById('loginMsg');
+const cedulaInput = loginForm.cedula;
+
+// Solo permitir 7 números en el campo cédula
+cedulaInput.addEventListener('input', function() {
+  // Eliminar cualquier caracter que no sea número
+  cedulaInput.value = cedulaInput.value.replace(/[^0-9]/g, '');
+  // Limitar a 7 caracteres
+  if (cedulaInput.value.length > 7) {
+    cedulaInput.value = cedulaInput.value.slice(0, 7);
+  }
+});
 
 function showMessage(message, type) {
   loginMsg.textContent = message;
@@ -26,6 +37,14 @@ loginForm.addEventListener('submit', function(e) {
   e.preventDefault();
   const cedula = loginForm.cedula.value;
   const password = loginForm.password.value;
+
+  // Validar que la cédula tenga exactamente 7 números
+  if (cedula.length !== 7) {
+    showMessage('La cédula debe tener exactamente 7 números.', 'error');
+    cedulaInput.focus();
+    return;
+  }
+
   const usuario = JSON.parse(localStorage.getItem(cedula));
 
   if (!usuario) {
