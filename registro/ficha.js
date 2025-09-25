@@ -1,25 +1,10 @@
-document.body.innerHTML = `
-  <form id="Registro">
-    <h2>Registro</h2>
-    <label>Nombre:<br><input type="text" name="nombre" required></label><br><br>
-    <label>Apellido:<br><input type="text" name="apellido" required></label><br><br>
-    <label>Cedula:<br><input type="number" name="cedula" required></label><br><br>
-    <label>Contraseña:<br><input type="password" name="password" required></label><br>
-    <span id="seguridadMsg" style="color:#2a4d8f;font-size:0.95em;"></span><br><br>
-    <label>Repetir Contraseña:<br><input type="password" name="repetirPassword" required></label><br><br>
-    <label>Fecha de nacimiento:<br><input type="date" name="fechaNacimiento" required></label><br><br>
-    <button type="submit">Registrar</button>
-    <button type="button" id="cancelarBtn">Cancelar</button>
-  </form>
-`;
-
-const form = document.getElementById ('Registro');
-const passwordInput = form.password;
-const repetirPasswordInput = form.repetirPassword;
+const form = document.getElementById ('form');
+const passwordInput = form.querySelector('[name="password"]');
+const repetirPasswordInput = form.querySelector('[name="repetirPassword"]');;
 const seguridadMsg = document.getElementById('seguridadMsg');
-const cedulaInput = form.cedula;
-const nombreInput = form.nombre;
-const apellidoInput = form.apellido;
+const cedulaInput = form.querySelector('[name="cedula"]');;
+const nombreInput = form.querySelector('[name="nombre"]');;
+const apellidoInput = form.querySelector('[name="apellido"]');;
 
 function esContrasenaSegura(contrasena) {
   const tieneLetra = /[a-zA-Z]/.test(contrasena);
@@ -74,6 +59,7 @@ passwordInput.addEventListener('input', function() {
   seguridadMsg.style.color = '#2a4d8f';
 });
 
+/*
 repetirPasswordInput.addEventListener('input', function() {
   if (repetirPasswordInput.value !== passwordInput.value) {
     seguridadMsg.textContent = 'Las contraseñas no coinciden';
@@ -83,6 +69,7 @@ repetirPasswordInput.addEventListener('input', function() {
     seguridadMsg.style.color = '#2a4d8f';
   }
 });
+*/
 
 form.addEventListener('submit', function(e) {
   e.preventDefault();
@@ -91,9 +78,7 @@ form.addEventListener('submit', function(e) {
     nombre: form.nombre.value,
     apellido: form.apellido.value,
     cedula: form.cedula.value,
-    password: form.password.value,
-    repetirPassword: form.repetirPassword.value,
-    fechaNacimiento: form.fechaNacimiento.value
+    password: form.password.value
   };
 
   // Validación de cédula: exactamente 7 dígitos y solo números positivos
@@ -103,36 +88,29 @@ form.addEventListener('submit', function(e) {
     return;
   }
 
-  if (data.password !== data.repetirPassword) {
-    alert('Las contraseñas no coinciden.');
-    repetirPasswordInput.focus();
-    return;
-  }
-
   if (!esContrasenaSegura(data.password)) {
     alert('La contraseña debe tener entre 8 y 20 caracteres, letras y números.');
     passwordInput.focus();
     return;
   }
 
-  // Verificar si la cédula ya está registrada
-  if (localStorage.getItem(data.cedula)) {
-    alert('La cédula ya está registrada. Inicia sesión o usa otra.');
-    cedulaInput.focus();
-    return;
-  }
-
-  // Guardar usuario en localStorage
-  localStorage.setItem(data.cedula, JSON.stringify({
-    nombre: data.nombre,
-    apellido: data.apellido,
-    cedula: data.cedula,
-    password: data.password,
-    fechaNacimiento: data.fechaNacimiento
-  }));
-
-  alert('Registro exitoso. Ahora puedes iniciar sesión.');
-  window.location.href = '../inicio/inicio.html'; // Cambia la ruta si es necesario
+  fetch('consulta.php', {
+    method: 'POST',
+    body: new FormData(form)
+  })
+  .then(response => response)
+  .then(result => {
+    if (result.ok) {
+    alert('Registro exitoso. Ahora puedes iniciar sesión.');
+    window.location.href = '../inicio/inicio.html'; // Cambia la ruta si es necesario
+    } else {
+      console.error('Error:', error);
+    alert('Hubo un error en el registro. Intenta nuevamente.');
+    }
+  })
+  .catch(error => {
+    
+  });
 });
 
 document.getElementById('cancelarBtn').addEventListener('click', function() {
