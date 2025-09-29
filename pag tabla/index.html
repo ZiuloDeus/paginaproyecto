@@ -1,73 +1,56 @@
 <!DOCTYPE html>
-<html lang="es">
+<html>
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Home</title>
-  <link rel="stylesheet" href="style.css"/>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <script src="script.js" defer></script>
+    <meta charset="UTF-8" />
+    <title>title</title>
+    <link rel="stylesheet" href="princi.css">
+    <script src="princi.js"></script>
 </head>
 <body>
-  <header>
-    <div class="header-buttons">
-      <button class="icon-btn"><i class="fas fa-cog"></i></button>
-      <button class="icon-btn" id="img-btn"><i class="fas fa-table"></i></button>
-      <input type="file" id="img-input" accept="image/*" style="display:none;">
-    </div>
-    <div id="img-preview" style="margin-top:10px;"></div>
-    <div class="profile-container">
-      <i class="fas fa-user-circle profile-icon" id="user-icon"></i>
-      <div class="user-menu" id="user-menu">
-        <ul>
-          <li>Iniciar sesión</li>
-          <li>Cerrar sesión</li>
-        </ul>
-      </div>
-    </div>
-  </header>
+    <header>
+        <div name="izquierda">
+            <h2>Logo</h2>
+        </div>
+        <div name="derecha">
+            <p>Nombre del Admin</p>
+            <img src="person-circle.svg" alt="Avatar" style="width:40px; height:40px; border-radius:50%;">
+        </div>
+    </header>
+    <div class="container">
+        <aside>
+            <nav>
+                <ul>
+                    <form onclick="showBox()" action="javascript:void(0);">
+                        <img src="gear-fill.svg" alt="Configuración" style="width:65px; height:35px;">
+                    </form>
+                </ul>
+            </nav>
+        </aside>    
+        <main>
+            <div class="botones">
+                <div>
+                    <a href="testt copy.html"><img src="house-add-fill.svg" alt="Espacios" style="width:90px; height: 80px;" ></a>
+                    <p>Salones/Aulas</p>
+                </div>
 
-  <main>
-    <section class="card-section">
-      <div class="icon-circle">
-        <i class="fas fa-calendar-alt"></i>
-      </div>
-      <div class="card">
-        <i class="fas fa-chevron-down arrow"></i>
-        <table>
-          <tr>
-            <th>Lunes</th>
-            <th>Martes</th>
-            <th>Miércoles</th>
-            <th>Jueves</th>
-            <th>Viernes</th>
-          </tr>
-          <tr>
-            <td>.</td>
-            <td>.</td>
-            <td>.</td>
-            <td>.</td>
-            <td>.</td>
-          </tr>
-          <tr>
-            <td>.</td>
-            <td>.</td>
-            <td>.</td>
-            <td>.</td>
-            <td>.</td>
-          </tr>
-          <tr>
-            <td>.</td>
-            <td>.</td>
-            <td>.</td>
-            <td>.</td>
-            <td>.</td>
-          </tr>
-        </table>
-      </div>
-    </section>
-  </main>
+                <div>
+                    <a href="testt copy.html"><img src="journal-bookmark-fill.svg" alt="Asignaturas" style="width: 90px; height: 80px;" ></a>
+                    <p>Asignaturas</p>
+                </div>
 
-  <footer></footer>
+                <div>
+                    <a href="testt copy.html"><img src="calendar-fill.svg" alt="Horarios" style="width: 90px; height: 80px;"></a>
+                    <p>Horarios</p>
+                </div>
+
+                <div>
+                    <a href="testt copy.html"><img src="people-fill.svg" alt="Grupos" style="width: 90px; height: 80px;"></a>
+                    <p>Grupos</p>
+                </div>
+
+                <div style="grid-area: e;"><h1>Asignar Docentes</h1></div>
+            </div>
+        </main>
+    </div>
 </body>
 </html>
