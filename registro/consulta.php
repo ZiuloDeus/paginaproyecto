@@ -8,6 +8,7 @@ $con = conectar_bd();
 $peticion = $con->prepare("INSERT INTO usuarios (nombre, contrasena) VALUES (?, ?)");
 $peticion->bind_param("ss", $nombre, $passwordHash);
 $peticion->execute();
+$resultado = $peticion->get_result();
 
 $peticion->close();
 $con->close();
