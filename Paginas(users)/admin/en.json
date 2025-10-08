@@ -1,0 +1,7 @@
+{
+    "days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+    "sidebar": ["Schedules", "Classrooms", "Resources", "Settings"],
+    "main": ["Groups", "Subjects", "Teachers"],
+    "title": "Assign Users"
+  }
+  

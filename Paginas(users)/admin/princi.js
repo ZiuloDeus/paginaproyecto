@@ -1,64 +1,101 @@
-         function showBox() {
-            // Crear el contenedor de la caja
-            const box = document.createElement('div');
-            box.id = 'customBox'; // Asignar un ID para estilos y manipulación
-            box.style.position = 'absolute';
-            box.style.top = '50%';
-            box.style.left = '50%';
-            box.style.transform = 'translate(-50%, -50%)';
-            box.style.width = '300px';
-            box.style.height = '200px';
-            box.style.backgroundColor = '#002c59';
-            box.style.color = 'white';
-            box.style.display = 'flex';
-            box.style.flexDirection = 'column';
-            box.style.justifyContent = 'space-around';
-            box.style.alignItems = 'center';
-            box.style.borderRadius = '10px';
-            box.style.boxShadow = '0 4px 8px rgba(0, 0, 0, 0.2)';
-            box.style.zIndex = '1000';
+let currentLang = "es";
+let isDarkMode = false;
 
-            // Crear el botón "Modo oscuro"
-            const darkModeButton = document.createElement('button');
-            darkModeButton.textContent = 'Modo oscuro';
-            darkModeButton.style.padding = '10px 20px';
-            darkModeButton.style.border = 'none';
-            darkModeButton.style.borderRadius = '5px';
-            darkModeButton.style.backgroundColor = '#005f73';
-            darkModeButton.style.color = 'white';
-            darkModeButton.style.cursor = 'pointer';
+function toggleDarkMode() {
+    isDarkMode = !isDarkMode;
+    if (isDarkMode) {
+        document.body.style.backgroundColor = '#121212';
+        document.body.style.backgroundImage = 'none';
+        document.body.style.color = '#ffffff';
+    } else {
+        document.body.style.backgroundColor = '#e5e5f7';
+        document.body.style.backgroundImage =
+            'linear-gradient(#444cf7 1px, transparent 1px), linear-gradient(to right, #444cf7 1px, #e5e5f7 1px)';
+        document.body.style.color = '#333';
+    }
+}
 
-            // Alternar entre modo oscuro y claro
-            let isDarkMode = false;
-            darkModeButton.onclick = () => {
-                if (isDarkMode) {
-                    document.body.style.backgroundColor = '';
-                    document.body.style.color = '';
-                    darkModeButton.textContent = 'Modo oscuro';
-                } else {
-                    document.body.style.backgroundColor = '#121212';
-                    document.body.style.color = '#ffffff';
-                    darkModeButton.textContent = 'Modo claro';
-                }
-                isDarkMode = !isDarkMode;
-            };
+document.addEventListener("DOMContentLoaded", () => {
 
-            // Crear el botón "Cerrar"
-            const closeButton = document.createElement('button');
-            closeButton.textContent = 'Cerrar';
-            closeButton.style.padding = '10px 20px';
-            closeButton.style.border = 'none';
-            closeButton.style.borderRadius = '5px';
-            closeButton.style.backgroundColor = '#e63946';
-            closeButton.style.color = 'white';
-            closeButton.style.cursor = 'pointer';
-            closeButton.onclick = () => box.remove();
+    window.showBox = function() {
+        if (document.getElementById('overlay')) return;
 
-            // Agregar los botones a la caja
-            box.appendChild(loginButton);
-            box.appendChild(darkModeButton);
-            box.appendChild(closeButton);
+        const overlay = document.createElement('div');
+        overlay.id = 'overlay';
+        overlay.onclick = closeBox;
 
-            // Agregar la caja al cuerpo del documento
-            document.body.appendChild(box);
+        const box = document.createElement('div');
+        box.id = 'customBox';
+
+        // Botón "Modo oscuro"
+        const darkModeButton = document.createElement('button');
+        darkModeButton.style.backgroundColor = '#005f73';
+        darkModeButton.textContent = (currentLang === "es") ? "Modo oscuro" : "Dark mode";
+        darkModeButton.onclick = toggleDarkMode;
+
+        // Botón "Cambiar idioma"
+        const langButton = document.createElement('button');
+        langButton.style.backgroundColor = '#1d3557';
+        langButton.textContent = (currentLang === "es") ? "English" : "Español";
+        langButton.onclick = () => {
+            currentLang = currentLang === "es" ? "en" : "es";
+            updateTableHeaders();
+            updateModalLabels(darkModeButton, langButton, closeButton);
+        };
+
+        // Botón "Cerrar"
+        const closeButton = document.createElement('button');
+        closeButton.style.backgroundColor = '#e63946';
+        closeButton.textContent = (currentLang === "es") ? "Cerrar" : "Close";
+        closeButton.onclick = closeBox;
+
+        function closeBox() {
+            overlay.remove();
+            box.remove();
         }
+
+        function updateModalLabels(dmBtn, lBtn, cBtn) {
+            dmBtn.textContent = (currentLang === "es") ? "Modo oscuro" : "Dark mode";
+            lBtn.textContent = (currentLang === "es") ? "English" : "Español";
+            cBtn.textContent = (currentLang === "es") ? "Cerrar" : "Close";
+        }
+
+        box.appendChild(darkModeButton);
+        box.appendChild(langButton);
+        box.appendChild(closeButton);
+
+        document.body.appendChild(overlay);
+        document.body.appendChild(box);
+    };
+
+    updateTableHeaders(); // inicializar idioma al cargar
+});
+
+function updateTableHeaders() {
+    fetch(currentLang + ".json")
+        .then(response => response.json())
+        .then(data => {
+            // Sidebar
+            const navItems = document.querySelectorAll("aside nav ul li p");
+            navItems.forEach((item, index) => {
+                if (data.sidebar && data.sidebar[index]) {
+                    item.innerText = data.sidebar[index];
+                }
+            });
+
+            // Main grid
+            const mainItems = document.querySelectorAll(".botones > div > a > p");
+            mainItems.forEach((item, index) => {
+                if (data.main && data.main[index]) {
+                    item.innerText = data.main[index];
+                }
+            });
+
+            // Title
+            const titleEl = document.querySelector('.botones div[style*="grid-area: e;"] h1');
+            if (titleEl && data.title) {
+                titleEl.innerText = data.title;
+            }
+        })
+        .catch(err => console.error("Error loading JSON:", err));
+}
