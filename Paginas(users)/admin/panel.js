@@ -99,3 +99,49 @@ function updateTableHeaders() {
         })
         .catch(err => console.error("Error loading JSON:", err));
 }
+
+// buscador.js
+function setupBuscador(inputId, resultadosId, phpFile, mostrarCallback) {
+    const input = document.getElementById(inputId);
+    const resultados = document.getElementById(resultadosId);
+
+    if (!input || !resultados) return;
+
+    input.addEventListener('input', function() {
+        const q = this.value;
+        fetch(`${phpFile}?q=${encodeURIComponent(q)}`)
+            .then(res => res.json())
+            .then(data => {
+                resultados.innerHTML = '';
+                data.forEach(item => {
+                    const li = document.createElement('li');
+                    li.textContent = mostrarCallback(item);
+                    resultados.appendChild(li);
+                });
+            });
+    });
+}
+
+// Ejemplo de uso para profesores:
+setupBuscador(
+    'busqueda_pro',      // id del input
+    'resultados_pro',    // id del ul
+    'buscador_pro.php',  // archivo PHP
+    prof => prof.nombre + ' ' + (prof.apellido || '')
+);
+
+// Para asignaturas:
+setupBuscador(
+    'busqueda_asi',
+    'resultados_asi',
+    'buscador_asignaturas.php',
+    asi => asi.nombre
+);
+
+// Para grupos:
+setupBuscador(
+    'busqueda_gru',
+    'resultados_gru',
+    'buscador_grupos.php',
+    gru => gru.nombre
+);
