@@ -1,7 +1,7 @@
 {
     "days": ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes"],
-    "sidebar": ["Horarios", "Eventos", "Recursos", "Configuración"],
-    "main": ["Salones/Aulas", "Asignaturas", "Horarios", "Grupos"],
-    "title": "Asignar Docentes"
+    "sidebar": ["Horarios", "Salones/aulas", "Recursos", "Configuración"],
+    "main": ["Grupos", "Asignaturas", "Profesores"],
+    "title": "Asignar Usuarios"
   }
   
