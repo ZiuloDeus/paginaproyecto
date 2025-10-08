@@ -1,3 +1,7 @@
+<?php
+require_once '../../front/profesores/conectar.php';
+$conn = conectar_bd();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
