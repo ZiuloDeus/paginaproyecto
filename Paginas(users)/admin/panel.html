@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Administración</title>
+    <link rel="stylesheet" href="panel.css">
+    <script src="panel.js" defer></script>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+</head>
+<body>
+    <header>
+        <div name="izquierda">
+            <h2>Logo</h2>
+        </div>
+        <div name="derecha">
+            <p>Nombre del Admin</p>
+            <img src="person-circle.svg" alt="Avatar" style="width:40px; height:40px; border-radius:50%;">
+        </div>
+    </header>
+    <div class="container">
+        <aside>
+            <nav>
+                <ul>
+                    <li>
+                        <img src="calendar-fill.svg" alt="Horarios">
+                        <p>Horarios</p>
+                    </li>
+                    <li>
+                        <img src="event-fill.svg" alt="Aulas/etc">
+                        <p>Salones/Aulas</p>
+                    </li>
+                    <li>
+                        <img src="resources-fill.svg" alt="Recursos">
+                        <p>Recursos</p>
+                    </li>
+                    <li onclick="showBox()">
+                        <img src="gear-fill.svg" alt="Configuración">
+                        <p>Configuración</p>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+        <main>
+            <div class="botones">
+                <div>
+                    <a href="buscador_gru.html"><img src="people-fill.svg" alt="Grupos"><p>Grupos</p></a>
+                </div>
+                <div>
+                    <a href="buscador_asi.html"><img src="book-fill.svg" alt="Asignaturas"><p>Asignaturas</p></a>
+                </div>
+                <div>
+                    <a href="buscador_pro.html"><img src="person-bounding-box.svg" alt="Profesores"><p>Profesores</p></a>  
+                </div>
+                <div style="grid-area: e;"><h1>Asignar Usuarios</h1></div>
+            </div>
+        </main>
+    </div> 
+</body>
+</html>

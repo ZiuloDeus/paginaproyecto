@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Administración</title>
+    <link rel="stylesheet" href="panel.css">
+    <script src="panel.js" defer></script>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+</head>
+<body>
+    <header>
+        <div name="izquierda">
+            <h2>Logo</h2>
+        </div>
+        <div name="derecha">
+            <p>Nombre del Admin</p>
+            <img src="person-circle.svg" alt="Avatar" style="width:40px; height:40px; border-radius:50%;">
+        </div>
+    </header>
+    <div class="container">
+        <aside>
+            <nav>
+                <ul>
+                    <li>
+                        <a href="panel.html"><img src="arrow-left-circle-fill.svg" alt="Back"></a>
+                        <p>Regresar</p>
+                    </li>
+                    <li>
+                        <img src="event-fill.svg" alt="Eventos">
+                        <p>Eventos</p>
+                    </li>
+                    <li>
+                        <img src="resources-fill.svg" alt="Recursos">
+                        <p>Recursos</p>
+                    </li>
+                    <li onclick="showBox()">
+                        <img src="gear-fill.svg" alt="Configuración">
+                        <p>Configuración</p>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+        <main>
+            <div class="texto">
+                <h1>Buscar profesores</h1>
+                <input id="busqueda_pro" type="text" placeholder="Buscar profesor">
+                <ul id="resultados_pro"></ul>
+                <ul id="resultados"></ul>
+            </div>
+            <div>
+                <button id="agregar-profesor">Agregar profesor</button>
+            </div>
+        </main>
+    </div> 
+</body>
+</html>
