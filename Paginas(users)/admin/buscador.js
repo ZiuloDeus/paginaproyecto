@@ -16,6 +16,33 @@ function toggleDarkMode() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll('.buscador').forEach(buscador => {
+        const resultados = document.getElementById('resultados');
+        buscador.addEventListener('input', function() {
+            const valor = buscador.value;
+            const tipo = buscador.dataset.tipo;
+            if (valor.length < 2) {
+                resultados.innerHTML = "";
+                return;
+            }
+            let endpoint = "";
+            if (tipo === "grupos") endpoint = "buscador_grupos.php";
+            if (tipo === "asignaturas") endpoint = "buscador_asignaturas.php";
+            if (tipo === "profesores") endpoint = "buscador_profesores.php";
+            fetch(`${endpoint}?q=${encodeURIComponent(valor)}`)
+                .then(res => res.json())
+                .then(data => {
+                    if (data.length === 0) {
+                        resultados.innerHTML = "<p>No se encontraron resultados.</p>";
+                    } else {
+                        resultados.innerHTML = data.map(item => `<p>${item.nombre}</p>`).join('');
+                    }
+                })
+                .catch(() => {
+                    resultados.innerHTML = "<p>Error al buscar.</p>";
+                });
+        });
+    });
 
     window.showBox = function() {
         if (document.getElementById('overlay')) return;
