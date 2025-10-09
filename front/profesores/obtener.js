@@ -21,7 +21,7 @@ formularios.forEach(form =>
         if (result.success) {
             Swal.fire({
                 icon: 'success',
-                title: 'Docente btenido',
+                title: 'Docente obtenido',
                 text: 'El docente ha sido obtenido exitosamente: ' + JSON.stringify(result.valor)
             });
             form.reset();

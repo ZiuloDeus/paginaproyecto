@@ -1,0 +1,5 @@
+{
+"sesion": "Log In",
+"message": "Select your role:",
+"options": ["Professor", "Administrator"]
+}

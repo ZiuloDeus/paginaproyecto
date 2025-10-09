@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Administración</title>
+    <link rel="stylesheet" href="menu.css">
+    <script src="menu.js" defer></script>
+</head>
+<body>
+    <header>
+        <div name="izquierda">
+        <h2> Logo </h2>
+        </div>
+        <div name="derecha">
+            <img src="gear-fill.svg" alt="Configuración" onclick="showBox()">
+        </div>
+    </header>
+    <div class="text-container">
+    <h1>Iniciar Sesion</h1>
+    <h3>Seleccione su rol:</h3>
+    </div>
+    <div class="container">
+        <button onclick="location.href='prof_inicio.html'">
+            <img src="graduate-cap.png" alt="Profesor">
+            <p>Profesor</p>
+        </button>
+        <button onclick="location.href='admin_inicio.html'">
+            <img src="people-fill.svg" alt="Administrador">
+            <p>Administrador</p>
+        </button>
+    </div>
