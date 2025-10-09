@@ -2,7 +2,7 @@
 require_once dirname(__FILE__).'/conexion.php';
 $conn = conectar_bd();
 
-header('Content-Type: application/json'); // Para que el JS reciba JSON
+header('Content-Type: application/json');
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $nombre = $_POST['nombre'] ?? '';
@@ -29,3 +29,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 mysqli_close($conn);
 ?>
+<?php
