@@ -13,3 +13,13 @@ document.getElementById('form-docentes-registrar').addEventListener('submit', fu
         Swal.fire('Error', 'No se pudo registrar.', 'error');
     });
 });
+
+document.getElementById('Registro').addEventListener('submit', function(e) {
+    const cedula = document.getElementById('cedula').value;
+    if (!/^\d{7}$/.test(cedula)) {
+        e.preventDefault();
+        document.getElementById('seguridadMsg').textContent = "La cédula debe tener exactamente 7 números.";
+        return false;
+    }
+    // Aquí va tu fetch si usas AJAX, o deja que el form se envíe normalmente
+});
