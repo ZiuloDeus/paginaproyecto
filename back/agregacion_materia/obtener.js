@@ -10,7 +10,7 @@ formularios.forEach(form =>
 
         const formData = new FormData(form);
 
-        const response = await fetch('/agregacion_materia/conexion.php', {
+        const response = await fetch('/conexion.php', {
             method: 'POST',
             body: formData
         });
