@@ -1,5 +1,5 @@
 const formularios = [
-    document.getElementById('id_materia_form'),
+    document.getElementById('id_materia_form1'),
 ];
 
 formularios.forEach(form =>
@@ -7,15 +7,12 @@ formularios.forEach(form =>
     form.addEventListener('submit', async (event) =>
     {
         event.preventDefault();
-
         const formData = new FormData(form);
-
         const response = await fetch('/conexion.php', {
             method: 'POST',
             body: formData
         });
         const result = await response.json();
-
         if (result.success) {
             Swal.fire({
                 icon: 'success',

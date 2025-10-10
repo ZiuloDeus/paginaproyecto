@@ -7,7 +7,7 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
-    <form id="form-materia-registrar">
+    <form id="id_materia_form1">
     <input type="text" name="nombre" placeholder="Nombre de materia" required>
     <button type="submit">Registrar</button>
 </form>
