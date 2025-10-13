@@ -2,6 +2,7 @@
     "sidebar": ["Schedules", "Classrooms", "Resources", "Settings"],
     "main": ["Groups", "Subjects", "Teachers"],
     "title": "Assign Users",
+    "logout": "Log Out",
     "Lunes": "Monday",
     "Martes": "Tuesday",
     "Miércoles": "Wednesday",

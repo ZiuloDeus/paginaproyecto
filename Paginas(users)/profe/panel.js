@@ -16,6 +16,13 @@ function toggleDarkMode() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+    const logout = document.getElementById('logout');
+
+    logout.addEventListener('click', () => {
+        sessionStorage.clear(); // Limpiar datos de sesión
+        window.location.href = "../../inicio/menu.html"; // redirigir a pagina de inicio de sesion
+    });
+
 
     window.showBox = function() {
         if (document.getElementById('overlay')) return;
