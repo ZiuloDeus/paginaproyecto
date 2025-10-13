@@ -216,29 +216,34 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   // --- FORMULARIO GRUPO ---
-  const formGrupo = document.getElementById('formGrupo');
-  if (formGrupo) {
-    formGrupo.addEventListener('submit', function(e) {
-      e.preventDefault();
-      const nombre = this.nombre.value;
-      fetch("registrar_grupo.php", {
-        method: 'POST',
-        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-        body: 'nombre=' + encodeURIComponent(nombre)
-      })
-      .then(res => res.text())
-      .then(data => {
-        // Mostrar mensaje flotante
-        mostrarNotificacion(data, data.includes('correctamente') ? 'success' : 'error');
-        document.getElementById('mensajeGrupo').innerText = data;
+const formGrupo = document.getElementById('formGrupo');
+if (formGrupo) {
+  formGrupo.addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const nombre = this.nombre.value;
+
+    fetch("registrar_grupo.php", {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: 'nombre=' + encodeURIComponent(nombre)
+    })
+    .then(res => res.json())
+    .then(data => {
+      // Mostrar mensaje y notificación
+      document.getElementById('mensajeGrupo').innerText = data.message;
+      mostrarNotificacion(data.message, data.success ? 'success' : 'error');
+
+      if (data.success) {
         this.reset();
-      })
-      .catch(() => {
-        mostrarNotificacion('Error al conectar con el servidor.', 'error');
-        document.getElementById('mensajeGrupo').innerText = 'Error al conectar con el servidor.';
-      });
+      }
+    })
+    .catch(() => {
+      mostrarNotificacion('Error al conectar con el servidor.', 'error');
+      document.getElementById('mensajeGrupo').innerText = 'Error al conectar con el servidor.';
     });
-  }
+  });
+}
 
   // --- FORMULARIO PROFESOR ---
   const formPro = document.getElementById('formPro');

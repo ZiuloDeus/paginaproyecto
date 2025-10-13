@@ -1,11 +1,15 @@
 <?php
 require_once "conexion.php";
+header('Content-Type: application/json; charset=utf-8');
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $nombre = $_POST['nombre'] ?? '';
+    $nombre = trim($_POST['nombre'] ?? '');
 
     if (empty($nombre)) {
-        echo "El nombre del grupo es requerido.";
+        echo json_encode([
+            "success" => false,
+            "message" => "El nombre del grupo es requerido."
+        ]);
         exit;
     }
 
@@ -15,15 +19,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt->bind_param("s", $nombre);
 
     if ($stmt->execute()) {
-        echo "Grupo registrado correctamente.";
+        echo json_encode([
+            "success" => true,
+            "message" => "Grupo registrado correctamente."
+        ]);
     } else {
-        echo "Error al registrar el grupo: " . $stmt->error;
+        echo json_encode([
+            "success" => false,
+            "message" => "Error al registrar el grupo: " . $stmt->error
+        ]);
     }
 
     $stmt->close();
     $conn->close();
 } else {
-    echo "Método no permitido.";
+    echo json_encode([
+        "success" => false,
+        "message" => "Método no permitido."
+    ]);
 }
 ?>
 
