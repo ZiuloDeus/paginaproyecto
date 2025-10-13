@@ -1,5 +1,6 @@
 <?php
-require_once '../../front/profesores/conectar.php';
+
+require_once 'conectar.php';
 $conn = conectar_bd();
 ?>
 <!DOCTYPE html>
