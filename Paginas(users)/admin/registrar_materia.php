@@ -1,22 +1,32 @@
 <?php
+require_once dirname(__FILE__).'/conexion.php';
+$conn = conectar_bd();
 
-include 'conexion.php';
+header('Content-Type: application/json');
 
-if (isset($_POST['nombre']) && !empty($_POST['nombre'])) {
-    $nombre = trim($_POST['nombre']);
-    // Evita inyección SQL usando prepared statements
-    $stmt = $conn->prepare("INSERT INTO materias (nombre) VALUES (?)");
-    $stmt->bind_param("s", $nombre);
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $nombre = $_POST['nombre'] ?? '';
 
-    if ($stmt->execute()) {
-        echo "Materia registrada correctamente";
+    if (!empty($nombre)) {
+        $nombre = trim($nombre);
+        $sql = "INSERT INTO Materias (nombre) VALUES (?)";
+        $stmt = mysqli_prepare($conn, $sql);
+
+        if ($stmt) {
+            mysqli_stmt_bind_param($stmt, "s", $nombre);
+            if (mysqli_stmt_execute($stmt)) {
+                echo json_encode(['success' => true, 'message' => 'Materia registrada correctamente']);
+            } else {
+                echo json_encode(['success' => false, 'error' => mysqli_stmt_error($stmt)]);
+            }
+            mysqli_stmt_close($stmt);
+        } else {
+            echo json_encode(['success' => false, 'error' => mysqli_error($conn)]);
+        }
     } else {
-        echo "Error al registrar: " . $conn->error;
+        echo json_encode(['success' => false, 'error' => 'El campo nombre está vacío']);
     }
-    $stmt->close();
-    $conn->close();
-} else {
-    echo "No se recibió el nombre";
 }
+
+mysqli_close($conn);
 ?>
-<?php
