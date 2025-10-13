@@ -46,7 +46,7 @@
                 <h1>Buscar grupos</h1>
                 <input id="id_grupos" type="text" placeholder="Buscar grupo">
                 <ul id="resultados_gru"></ul>
-                <button onclick="abrirModal()">Agregar grupo</button>
+                <button type="button" onclick="abrirModal('grupo')">Agregar grupo</button>
             </div>
         </main>
             </div> 
@@ -62,5 +62,14 @@
         <div id="mensajeGrupo"></div>
       </div>
     </div>
+    <script>
+    function abrirModal() {
+      document.getElementById('modalGrupo').style.display = 'flex';
+    }
+    function cerrarModal() {
+      document.getElementById('modalGrupo').style.display = 'none';
+      document.getElementById('mensajeGrupo').innerText = '';
+    }
+    </script>
 </body>
 </html>

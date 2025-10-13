@@ -153,12 +153,41 @@ setupBuscador(
     gru => gru.nombre
 );
 
-function abrirModal() {
-  document.getElementById('modalMateria').style.display = 'flex';
+function abrirModal(tipo) {
+  if (tipo === 'grupo') {
+    var modalGrupo = document.getElementById('modalGrupo');
+    if (modalGrupo) modalGrupo.style.display = 'flex';
+  } else if (tipo === 'materia') {
+    var modalMateria = document.getElementById('modalMateria');
+    if (modalMateria) modalMateria.style.display = 'flex';
+  } else if (tipo === 'pro') {
+    var modalPro = document.getElementById('modalPro');
+    if (modalPro) modalPro.style.display = 'flex';
+  }
 }
-function cerrarModal() {
-  document.getElementById('modalMateria').style.display = 'none';
-  document.getElementById('mensajeMateria').innerText = '';
+function cerrarModal(tipo) {
+  if (tipo === 'grupo') {
+    var modalGrupo = document.getElementById('modalGrupo');
+    if (modalGrupo) {
+      modalGrupo.style.display = 'none';
+      var mensajeGrupo = document.getElementById('mensajeGrupo');
+      if (mensajeGrupo) mensajeGrupo.innerText = '';
+    }
+  } else if (tipo === 'materia') {
+    var modalMateria = document.getElementById('modalMateria');
+    if (modalMateria) {
+      modalMateria.style.display = 'none';
+      var mensajeMateria = document.getElementById('mensajeMateria');
+      if (mensajeMateria) mensajeMateria.innerText = '';
+    }
+  } else if (tipo === 'pro') {
+    var modalPro = document.getElementById('modalPro');
+    if (modalPro) {
+      modalPro.style.display = 'none';
+      var mensajePro = document.getElementById('mensajePro');
+      if (mensajePro) mensajePro.innerText = '';
+    }
+  }
 }
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -192,6 +221,27 @@ document.addEventListener('DOMContentLoaded', function() {
       .then(res => res.text())
       .then(data => {
         document.getElementById('mensajeGrupo').innerText = data;
+        this.reset();
+      });
+    });
+  }
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+  const form = document.getElementById('formPro');
+  if (form) {
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const nombre = this.nombre.value;
+      const apellido = this.apellido.value;
+      fetch("registrar_pro.php", {
+        method: 'POST',
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        body: 'nombre=' + encodeURIComponent(nombre) + '&apellido=' + encodeURIComponent(apellido)
+      })
+      .then(res => res.text())
+      .then(data => {
+        document.getElementById('mensajePro').innerText = data;
         this.reset();
       });
     });
