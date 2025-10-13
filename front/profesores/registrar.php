@@ -4,23 +4,33 @@ require_once 'conectar.php';
 $conn = conectar_bd();
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <title>Registro de Docentes</title>
+  <link rel="stylesheet" href="princi.css">
 </head>
 <body>
-    <form id="form-docentes-registrar">
-        <input type="text" name="nombre" placeholder="Nombre">
-        <input type="text" name="apellido" placeholder="Apellido">
-        <input type="text" name="ci" placeholder="Cedula de identidad">
-        <input type="email" name="email" placeholder="Correo electronico">
-        <input type="password" name="contrasena" placeholder="Contrasena">
-        <input type="submit">Registrar</input>
-    </form>
+<div class="form-container">
+    <h1>Registro de Docentes</h1>
+    <form method="post" action="C:\Users\Admin\Documents\GitHub\paginaproyecto\back\profesores\registrar.php">
+      <label for="nombre">Nombre:</label>
+      <input type="text" id="nombre" name="nombre" required>
 
-    <script src="registrar.js"></script>
+      <label for="apellido">Apellido:</label>
+      <input type="text" id="apellido" name="apellido" required>
+
+      <label for="ci">Cédula:</label>
+      <input type="text" id="ci" name="ci" maxlength="7" required>
+
+      <label for="email">Correo electrónico:</label>
+      <input type="email" id="email" name="email" required>
+
+      <label for="contrasena">Contraseña:</label>
+      <input type="password" id="contrasena" name="contrasena" required>
+
+      <input type="submit" value="Registrar">
+    </form>
+  </div>
 </body>
 </html>
