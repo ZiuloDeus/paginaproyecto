@@ -8,13 +8,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $nombre = $_POST['nombre'] ?? '';
 
     if (!empty($nombre)) {
+        $nombre = trim($nombre);
         $sql = "INSERT INTO Materias (nombre) VALUES (?)";
         $stmt = mysqli_prepare($conn, $sql);
 
         if ($stmt) {
             mysqli_stmt_bind_param($stmt, "s", $nombre);
             if (mysqli_stmt_execute($stmt)) {
-                echo json_encode(['success' => true]);
+                echo json_encode(['success' => true, 'message' => 'Materia registrada correctamente']);
             } else {
                 echo json_encode(['success' => false, 'error' => mysqli_stmt_error($stmt)]);
             }
@@ -29,4 +30,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 mysqli_close($conn);
 ?>
-<?php

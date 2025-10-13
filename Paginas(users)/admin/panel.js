@@ -145,3 +145,28 @@ setupBuscador(
     'buscador_grupos.php',
     gru => gru.nombre
 );
+
+function abrirModal() {
+  document.getElementById('modalMateria').style.display = 'flex';
+}
+function cerrarModal() {
+  document.getElementById('modalMateria').style.display = 'none';
+  document.getElementById('mensajeMateria').innerText = '';
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  document.getElementById('formMateria').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const nombre = this.nombre.value;
+    fetch("registrar_materia.php", {
+      method: 'POST',
+      headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+      body: 'nombre=' + encodeURIComponent(nombre)
+    })
+    .then(res => res.text())
+    .then(data => {
+      document.getElementById('mensajeMateria').innerText = data;
+      this.reset();
+    });
+  });
+});

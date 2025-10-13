@@ -44,14 +44,23 @@
         <main>
             <div class="texto">
                 <h1>Buscar asignaturas</h1>
-                <input id="busqueda_asi" type="text" placeholder="Buscar asignatura">
+                <input id="id_materia" type="text" placeholder="Buscar asignatura">
                 <ul id="resultados_asi"></ul>
-                <button>Agregar asignatura</button>
-            </div>
-            <div>
-                <button id="agregar-profesor">Agregar asignatura</button>
+                <button onclick="abrirModal()">Agregar asignatura</button>
             </div>
         </main>
     </div> 
+    <!-- Ventana modal para agregar materia -->
+    <div id="modalMateria" class="modal" style="display:none;">
+      <div class="modal-content">
+        <span class="close" onclick="cerrarModal()">&times;</span>
+        <h2>Agregar Materia</h2>
+        <form id="formMateria">
+          <input type="text" name="nombre" placeholder="Nombre de la materia" required>
+          <button type="submit">Registrar</button>
+        </form>
+        <div id="mensajeMateria"></div>
+      </div>
+    </div>
 </body>
 </html>
