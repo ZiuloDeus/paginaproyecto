@@ -177,3 +177,23 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 });
+
+document.addEventListener('DOMContentLoaded', function() {
+  const form = document.getElementById('formGrupo');
+  if (form) {
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const nombre = this.nombre.value;
+      fetch("registrar_grupo.php", {
+        method: 'POST',
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        body: 'nombre=' + encodeURIComponent(nombre)
+      })
+      .then(res => res.text())
+      .then(data => {
+        document.getElementById('mensajeGrupo').innerText = data;
+        this.reset();
+      });
+    });
+  }
+});
