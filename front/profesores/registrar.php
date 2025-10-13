@@ -13,7 +13,7 @@ $conn = conectar_bd();
 <body>
 <div class="form-container">
     <h1>Registro de Docentes</h1>
-    <form method="post" action="C:\Users\Admin\Documents\GitHub\paginaproyecto\back\profesores\registrar.php">
+    <form method="post" action="../../back/profesores/registrar.php">
       <label for="nombre">Nombre:</label>
       <input type="text" id="nombre" name="nombre" required>
 
