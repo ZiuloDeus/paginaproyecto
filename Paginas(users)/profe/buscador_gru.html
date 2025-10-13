@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Administración</title>
+    <link rel="stylesheet" href="panel.css">
+    <script src="panel.js" defer></script>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+</head>
+<body>
+    <header>
+        <div name="izquierda">
+            <h2>Logo</h2>
+        </div>
+        <div name="derecha">
+            <p>Nombre del Admin</p>
+            <img src="person-circle.svg" alt="Avatar" style="width:40px; height:40px; border-radius:50%;">
+        </div>
+    </header>
+    <div class="container">
+        <aside>
+            <nav>
+                <ul>
+                    <li>
+                        <a href="panel.html"><img src="arrow-left-circle-fill.svg" alt="Back"></a>
+                        <p>Regresar</p>
+                    </li>
+                    <li>
+                        <img src="event-fill.svg" alt="Eventos">
+                        <p>Eventos</p>
+                    </li>
+                    <li>
+                        <img src="resources-fill.svg" alt="Recursos">
+                        <p>Recursos</p>
+                    </li>
+                    <li onclick="showBox()">
+                        <img src="gear-fill.svg" alt="Configuración">
+                        <p>Configuración</p>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+        <main>
+            <div class="texto">
+                <h1>Buscar grupos</h1>
+                <input id="id_materia" type="text" placeholder="Buscar grupo">
+                <ul id="resultados_gru"></ul>
+                <button onclick="abrirModal()">Agregar grupo</button>
+            </div>
+        </main>
+            </div> 
+    <!-- Ventana modal para agregar materia -->
+    <div id="modalMateria" class="modal" style="display:none;">
+      <div class="modal-content">
+        <span class="close" onclick="cerrarModal()">&times;</span>
+        <h2>Agregar Grupo</h2>
+        <form id="formMateria">
+          <input type="text" name="nombre" placeholder="Nombre del grupo" required>
+          <button type="submit">Registrar</button>
+        </form>
+        <div id="mensajeMateria"></div>
+      </div>
+    </div>
+</body>
+</html>

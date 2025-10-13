@@ -137,14 +137,6 @@ setupBuscador(
     prof => prof.nombre + ' ' + (prof.apellido || '')
 );
 
-// Para asignaturas:
-setupBuscador(
-    'busqueda_asi',
-    'resultados_asi',
-    'buscador_asignaturas.php',
-    asi => asi.nombre
-);
-
 // Para grupos:
 setupBuscador(
     'busqueda_gru',
@@ -152,48 +144,3 @@ setupBuscador(
     'buscador_grupos.php',
     gru => gru.nombre
 );
-
-function abrirModal() {
-  document.getElementById('modalMateria').style.display = 'flex';
-}
-function cerrarModal() {
-  document.getElementById('modalMateria').style.display = 'none';
-  document.getElementById('mensajeMateria').innerText = '';
-}
-
-document.addEventListener('DOMContentLoaded', function() {
-  document.getElementById('formMateria').addEventListener('submit', function(e) {
-    e.preventDefault();
-    const nombre = this.nombre.value;
-    fetch("registrar_materia.php", {
-      method: 'POST',
-      headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-      body: 'nombre=' + encodeURIComponent(nombre)
-    })
-    .then(res => res.text())
-    .then(data => {
-      document.getElementById('mensajeMateria').innerText = data;
-      this.reset();
-    });
-  });
-});
-
-document.addEventListener('DOMContentLoaded', function() {
-  const form = document.getElementById('formGrupo');
-  if (form) {
-    form.addEventListener('submit', function(e) {
-      e.preventDefault();
-      const nombre = this.nombre.value;
-      fetch("registrar_grupo.php", {
-        method: 'POST',
-        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-        body: 'nombre=' + encodeURIComponent(nombre)
-      })
-      .then(res => res.text())
-      .then(data => {
-        document.getElementById('mensajeGrupo').innerText = data;
-        this.reset();
-      });
-    });
-  }
-});
