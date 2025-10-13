@@ -1,5 +1,4 @@
 <?php
-
 require_once 'conectar.php';
 $conn = conectar_bd();
 ?>
