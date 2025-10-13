@@ -477,3 +477,24 @@ button:hover {
     color: #721c24;
     border: 1px solid #f5c6cb;
 }
+
+.notificacion-flotante {
+  position: fixed;
+  top: 30px;
+  right: 30px;
+  z-index: 9999;
+  background: #333;
+  color: #fff;
+  padding: 16px 32px;
+  border-radius: 8px;
+  font-size: 1.1em;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.18);
+  opacity: 0.95;
+  transition: opacity 0.3s;
+}
+.notificacion-flotante.success {
+  background: #28a745;
+}
+.notificacion-flotante.error {
+  background: #e63946;
+}

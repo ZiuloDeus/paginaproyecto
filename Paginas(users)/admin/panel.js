@@ -204,10 +204,12 @@ document.addEventListener('DOMContentLoaded', function() {
       })
       .then(res => res.text())
       .then(data => {
+        mostrarNotificacion(data, data.includes('correctamente') ? 'success' : 'error');
         document.getElementById('mensajeMateria').innerText = data;
         this.reset();
       })
       .catch(() => {
+        mostrarNotificacion('Error al conectar con el servidor.', 'error');
         document.getElementById('mensajeMateria').innerText = 'Error al conectar con el servidor.';
       });
     });
@@ -226,10 +228,13 @@ document.addEventListener('DOMContentLoaded', function() {
       })
       .then(res => res.text())
       .then(data => {
+        // Mostrar mensaje flotante
+        mostrarNotificacion(data, data.includes('correctamente') ? 'success' : 'error');
         document.getElementById('mensajeGrupo').innerText = data;
         this.reset();
       })
       .catch(() => {
+        mostrarNotificacion('Error al conectar con el servidor.', 'error');
         document.getElementById('mensajeGrupo').innerText = 'Error al conectar con el servidor.';
       });
     });
@@ -249,12 +254,25 @@ document.addEventListener('DOMContentLoaded', function() {
       })
       .then(res => res.text())
       .then(data => {
+        mostrarNotificacion(data, data.includes('correctamente') ? 'success' : 'error');
         document.getElementById('mensajePro').innerText = data;
         this.reset();
       })
       .catch(() => {
+        mostrarNotificacion('Error al conectar con el servidor.', 'error');
         document.getElementById('mensajePro').innerText = 'Error al conectar con el servidor.';
       });
     });
   }
 });
+
+// --- Notificación flotante ---
+function mostrarNotificacion(mensaje, tipo) {
+  let notif = document.createElement('div');
+  notif.className = 'notificacion-flotante ' + tipo;
+  notif.innerText = mensaje;
+  document.body.appendChild(notif);
+  setTimeout(() => {
+    notif.remove();
+  }, 2500);
+}
