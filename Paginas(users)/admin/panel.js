@@ -131,7 +131,7 @@ function setupBuscador(inputId, resultadosId, phpFile, mostrarCallback) {
 
 // Ejemplo de uso para profesores:
 setupBuscador(
-    'busqueda_pro',      // id del input
+    'id_profesor',      // id del input
     'resultados_pro',    // id del ul
     'buscador_pro.php',  // archivo PHP
     prof => prof.nombre + ' ' + (prof.apellido || '')
@@ -139,7 +139,7 @@ setupBuscador(
 
 // Para asignaturas:
 setupBuscador(
-    'busqueda_asi',
+    'id_materia',
     'resultados_asi',
     'buscador_asignaturas.php',
     asi => asi.nombre
@@ -147,7 +147,7 @@ setupBuscador(
 
 // Para grupos:
 setupBuscador(
-    'busqueda_gru',
+    'id_grupos',
     'resultados_gru',
     'buscador_grupos.php',
     gru => gru.nombre
