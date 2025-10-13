@@ -1,6 +1,6 @@
 <?php
 
-require_once "../../registro/conectar.php";
+require_once "conexion.php";
 
 header('Content-Type: application/json');
 

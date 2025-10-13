@@ -1,11 +1,11 @@
 <?php
 
-require_once "../../registro/conectar.php";
+require_once "conexion.php";
 header('Content-Type: application/json');
 $conn = conectar_bd();
 
 $busqueda = $_GET['q'] ?? '';
-$sql = "SELECT * FROM asignaturas WHERE nombre LIKE ?";
+$sql = "SELECT * FROM materias WHERE nombre LIKE ?";
 $stmt = $conn->prepare($sql);
 $like = "%$busqueda%";
 $stmt->bind_param("s", $like);
@@ -18,6 +18,6 @@ while ($row = $result->fetch_assoc()) {
 }
 echo json_encode($asignaturas);
 
-$stmt->close();
-$conn->close();
+$stmt->close(); 
+$conn->close(); 
 ?>
