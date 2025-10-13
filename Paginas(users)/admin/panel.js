@@ -190,27 +190,33 @@ function cerrarModal(tipo) {
   }
 }
 
+// --- FORMULARIO MATERIA ---
 document.addEventListener('DOMContentLoaded', function() {
-  document.getElementById('formMateria').addEventListener('submit', function(e) {
-    e.preventDefault();
-    const nombre = this.nombre.value;
-    fetch("registrar_materia.php", {
-      method: 'POST',
-      headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-      body: 'nombre=' + encodeURIComponent(nombre)
-    })
-    .then(res => res.text())
-    .then(data => {
-      document.getElementById('mensajeMateria').innerText = data;
-      this.reset();
+  const formMateria = document.getElementById('formMateria');
+  if (formMateria) {
+    formMateria.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const nombre = this.nombre.value;
+      fetch("registrar_materia.php", {
+        method: 'POST',
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        body: 'nombre=' + encodeURIComponent(nombre)
+      })
+      .then(res => res.text())
+      .then(data => {
+        document.getElementById('mensajeMateria').innerText = data;
+        this.reset();
+      })
+      .catch(() => {
+        document.getElementById('mensajeMateria').innerText = 'Error al conectar con el servidor.';
+      });
     });
-  });
-});
+  }
 
-document.addEventListener('DOMContentLoaded', function() {
-  const form = document.getElementById('formGrupo');
-  if (form) {
-    form.addEventListener('submit', function(e) {
+  // --- FORMULARIO GRUPO ---
+  const formGrupo = document.getElementById('formGrupo');
+  if (formGrupo) {
+    formGrupo.addEventListener('submit', function(e) {
       e.preventDefault();
       const nombre = this.nombre.value;
       fetch("registrar_grupo.php", {
@@ -222,15 +228,17 @@ document.addEventListener('DOMContentLoaded', function() {
       .then(data => {
         document.getElementById('mensajeGrupo').innerText = data;
         this.reset();
+      })
+      .catch(() => {
+        document.getElementById('mensajeGrupo').innerText = 'Error al conectar con el servidor.';
       });
     });
   }
-});
 
-document.addEventListener('DOMContentLoaded', function() {
-  const form = document.getElementById('formPro');
-  if (form) {
-    form.addEventListener('submit', function(e) {
+  // --- FORMULARIO PROFESOR ---
+  const formPro = document.getElementById('formPro');
+  if (formPro) {
+    formPro.addEventListener('submit', function(e) {
       e.preventDefault();
       const nombre = this.nombre.value;
       const apellido = this.apellido.value;
@@ -243,6 +251,9 @@ document.addEventListener('DOMContentLoaded', function() {
       .then(data => {
         document.getElementById('mensajePro').innerText = data;
         this.reset();
+      })
+      .catch(() => {
+        document.getElementById('mensajePro').innerText = 'Error al conectar con el servidor.';
       });
     });
   }
