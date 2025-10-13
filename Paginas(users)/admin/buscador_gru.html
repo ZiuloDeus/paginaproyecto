@@ -42,15 +42,25 @@
             </nav>
         </aside>
         <main>
-            <div class="texto"> 
-                <h1>Buscar grupo</h1>
-                <input id="busqueda_gru" type="text" placeholder="Buscar grupo">
+            <div class="texto">
+                <h1>Buscar grupos</h1>
+                <input id="id_materia" type="text" placeholder="Buscar grupo">
                 <ul id="resultados_gru"></ul>
-            </div>
-            <div>
-                <button id="agregar-profesor">Agregar grupo</button>
+                <button onclick="abrirModal()">Agregar grupo</button>
             </div>
         </main>
-    </div> 
+            </div> 
+    <!-- Ventana modal para agregar materia -->
+    <div id="modalMateria" class="modal" style="display:none;">
+      <div class="modal-content">
+        <span class="close" onclick="cerrarModal()">&times;</span>
+        <h2>Agregar Grupo</h2>
+        <form id="formMateria">
+          <input type="text" name="nombre" placeholder="Nombre del grupo" required>
+          <button type="submit">Registrar</button>
+        </form>
+        <div id="mensajeMateria"></div>
+      </div>
+    </div>
 </body>
 </html>
