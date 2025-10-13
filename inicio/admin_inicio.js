@@ -1,6 +1,6 @@
 document.body.innerHTML = `
   <form id="Login">
-    <h2>Iniciar Sesión</h2>
+    <h2>Iniciar Sesión - Administrador </h2>
     <label>Cédula:<br><input type="number" name="cedula" required></label><br><br>
     <label>Contraseña:<br><input type="password" name="password" required></label><br><br>
     <button type="submit">Entrar</button>
@@ -56,9 +56,9 @@ loginForm.addEventListener('submit', function(e) {
     return;
   }
   showMessage('Inicio de sesión exitoso!' , 'success');
-  // Aquí puedes redirigir o mostrar el contenido protegido
+  window.location.href = '../Paginas(users)/admin/panel.html' // redirigir a pagina principal de admin
 });
 
 document.getElementById('irRegistro').addEventListener('click', function() {
-  window.location.href = '../registro/registro.html';
+  window.location.href = '../registro/registro.html'; // redirigir a pagina de registro
 });
