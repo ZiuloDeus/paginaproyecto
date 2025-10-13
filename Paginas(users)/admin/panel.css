@@ -240,3 +240,30 @@ table, th, td {
   cursor: pointer;
   font-size: 24px;
 }
+
+table {
+        width: 50rem;
+        border-collapse: collapse;
+        margin: 20px 0;
+        font-size: 18px;
+        text-align: center;
+        background-color: #f9f9f9; /* Fondo de la tabla */
+}
+
+th, td {
+        border: 1px solid #ddd; /* Líneas que delimitan las celdas */
+        padding: 12px;
+}
+
+th {
+        background-color: #002c59; /* Fondo de los encabezados */
+        color: white;
+}
+
+    tr:nth-child(even) {
+        background-color: #f2f2f2; /* Fondo alternativo para filas pares */
+}
+
+tr:hover {
+        background-color: #ddd; /* Fondo al pasar el cursor */
+}
