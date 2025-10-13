@@ -1,7 +1,11 @@
 {
-    "days": ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes"],
     "sidebar": ["Horarios", "Salones/aulas", "Recursos", "Configuración"],
     "main": ["Grupos", "Asignaturas", "Profesores"],
-    "title": "Asignar Usuarios"
+    "title": "Asignar Usuarios",
+    "Lunes": "Lunes",
+    "Martes": "Martes",
+    "Miércoles": "Miércoles",
+    "Jueves": "Jueves",
+    "Viernes": "Viernes"
   }
   

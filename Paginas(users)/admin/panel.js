@@ -96,6 +96,13 @@ function updateTableHeaders() {
             if (titleEl && data.title) {
                 titleEl.innerText = data.title;
             }
+
+            // Tabla de horarios
+            if (data.Lunes) document.getElementById('th-lunes').textContent = data.Lunes;
+            if (data.Martes) document.getElementById('th-martes').textContent = data.Martes;
+            if (data['Miércoles']) document.getElementById('th-miercoles').textContent = data['Miércoles'];
+            if (data.Jueves) document.getElementById('th-jueves').textContent = data.Jueves;
+            if (data.Viernes) document.getElementById('th-viernes').textContent = data.Viernes;
         })
         .catch(err => console.error("Error loading JSON:", err));
 }
