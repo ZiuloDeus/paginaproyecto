@@ -1,10 +1,14 @@
 document.getElementById('form-docentes-registrar').addEventListener('submit', function(e) {
-    e.preventDefault();
+    e.preventDefault(); // Evita que se recargue la página
+
     const formData = new FormData(this);
-    fetch('../../back/profesores/registrar_backend.php', {
+
+ 
+    fetch('C:\Users\Admin\Documents\GitHub\paginaproyecto\back\profesores\registrar.php', { // usa / para ruta absoluta
         method: 'POST',
         body: formData
     })
+    
     .then(res => res.json())
     .then(data => {
         Swal.fire('¡Registrado!', 'El docente fue registrado.', 'success');
@@ -14,12 +18,3 @@ document.getElementById('form-docentes-registrar').addEventListener('submit', fu
     });
 });
 
-document.getElementById('Registro').addEventListener('submit', function(e) {
-    const cedula = document.getElementById('cedula').value;
-    if (!/^\d{7}$/.test(cedula)) {
-        e.preventDefault();
-        document.getElementById('seguridadMsg').textContent = "La cédula debe tener exactamente 7 números.";
-        return false;
-    }
-    // Aquí va tu fetch si usas AJAX, o deja que el form se envíe normalmente
-});
