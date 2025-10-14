@@ -1,39 +1,66 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista de Profesores</title>
-    <link rel="stylesheet" href="panel.css">
-    <script src="bus_pro.js" defer></script>
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lista de Profesores</title>
+  <link rel="stylesheet" href="panel.css" />
+  <script src="bus_pro.js" defer></script>
 </head>
 <body>
-    <header>
-        <div name="izquierda">
-            <h2>Logo</h2>
-        </div>
-        <div name="derecha">
-            <p>Nombre del Admin</p>
-            <img src="person-circle.svg" alt="Avatar" style="width:40px; height:40px; border-radius:50%;">
-        </div>
-    </header>
-<table id="grilla-profes">
-    <tr>
-        <th>Nombre</th>
-        <th>Apellido</th>
-        <th>Correo</th>
-        <th>Materia</th>
-        <th>Acción</th>
-    </tr>
-    <tr>
-        <td><input type="text" name="nombre" value="Carlos"></td>
-        <td><input type="text" name="apellido" value="López"></td>
-        <td><input type="text" name="correo" value="carlos@itsp.edu"></td>
-        <td><input type="text" name="materia" value="Matemática"></td>
-        <td><button class="btn-agregar">Agregar</button></td>
-    </tr>
-</table>
+  <header>
+    <div name="izquierda">
+      <h2>Logo</h2>
+    </div>
+    <div name="derecha">
+      <p>Admin</p>
+      <img src="person-circle.svg" alt="Perfil" style="width:40px; height:40px; border-radius:50%;">
+    </div>
+  </header>
 
+  <div class="container">
+    <aside>
+      <nav>
+        <ul>
+          <li>
+            <a href="panel.html"><img src="arrow-left-circle-fill.svg" alt="Volver"></a>
+            <p>Regresar</p>
+          </li>
+        </ul>
+      </nav>
+    </aside>
+
+    <main>
+      <div class="texto">
+        <h1>Lista de Profesores</h1>
+
+        <!-- Tabla solo muestra los datos -->
+        <table id="tabla-profesores">
+          <thead>
+            <tr>
+              <th>Nombre</th>
+              <th>Materia</th>
+            </tr>
+          </thead>
+          <tbody id="lista-profesores">
+            <!-- Aquí se insertan los profesores desde JS -->
+          </tbody>
+        </table>
+
+        <button id="btnAgregarProfe">Agregar Profesor</button>
+      </div>
+    </main>
+  </div>
+
+  <!-- Modal para agregar profesor -->
+  <div id="modalAgregar" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2>Agregar Profesor</h2>
+      <input type="text" id="nombreProfe" placeholder="Nombre del profesor">
+      <input type="text" id="materiaProfe" placeholder="Materia que dicta">
+      <button id="guardarProfe">Guardar</button>
+    </div>
+  </div>
 </body>
 </html>

@@ -10,8 +10,8 @@ html, body {
 }
 
 body {
-    background-color: #A7C7E7;
-    background-image: linear-gradient(#444cf7 1px, transparent 1px), linear-gradient(to right, #444cf7 1px, #A7C7E7 1px);
+    background-color: white;
+    background-image: linear-gradient(#91C4C3 1px, transparent 1px), linear-gradient(to right, #91C4C3 1px, #DEDED1 1px);
     background-size: 20px 20px;
     display: flex;
     flex-direction: column;
@@ -507,3 +507,60 @@ button:hover {
 .notificacion-flotante.error {
   background: #e63946;
 }
+
+#tabla-profesores {
+    color:black;
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    font-size: 16px;
+}
+
+/* Contenedor específico de la página de Salones */
+.salones main {
+    display: flex;
+    flex-direction: column; /* apila verticalmente */
+    gap: 20px; /* espacio entre tablas */
+    padding: 20px;
+}
+
+/* Estilos solo para las tablas de Salones */
+.salones table#tabla-aulas,
+.salones table#tabla-salones {
+    width: 100%; /* ancho completo del contenedor */
+    border-collapse: collapse;
+    text-align: center;
+}
+
+/* Encabezados de las tablas */
+.salones table#tabla-aulas th,
+.salones table#tabla-salones th {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px;
+}
+
+/* Celdas de las tablas */
+.salones table#tabla-aulas td,
+.salones table#tabla-salones td {
+    border: 1px solid #ddd;
+    padding: 10px;
+}
+
+/* Cambio de color al pasar el mouse */
+.salones table#tabla-aulas td:hover,
+.salones table#tabla-salones td:hover {
+    background-color: #f2f2f2;
+}
+
+/* Colores para celdas al hacer click */
+.salones td.verde {
+    background-color: green;
+    color: white; /* Opcional: que el texto contraste */
+}
+
+.salones td.amarillo {
+    background-color: yellow;
+    color: black;
+}
+

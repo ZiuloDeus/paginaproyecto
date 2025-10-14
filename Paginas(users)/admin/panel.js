@@ -292,3 +292,28 @@ function mostrarNotificacion(mensaje, tipo) {
     notif.remove();
   }, 2500);
 }
+
+// Arreglo con los IDs de las tablas
+const tablas = ['tabla-aulas', 'tabla-salones'];
+
+tablas.forEach(id => {
+    const tabla = document.getElementById(id);
+    if (tabla) {
+        // Seleccionamos todas las celdas de la tabla
+        const celdas = tabla.getElementsByTagName('td');
+        for (let td of celdas) {
+            td.addEventListener('click', () => {
+                // Alterna clases verde/amarillo
+                if (td.classList.contains('verde')) {
+                    td.classList.remove('verde');
+                    td.classList.add('amarillo');
+                } else if (td.classList.contains('amarillo')) {
+                    td.classList.remove('amarillo');
+                    td.classList.add('verde');
+                } else {
+                    td.classList.add('verde'); // color inicial
+                }
+            });
+        }
+    }
+});

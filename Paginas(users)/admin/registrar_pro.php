@@ -2,24 +2,32 @@
 require_once "conexion.php";
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $nombre = $_POST['nombre'] ?? '';
-    $apellido = $_POST['apellido'] ?? '';
-    if (empty($nombre) || empty($apellido)) {
-        echo "El nombre y apellido del profesor son requeridos.";
+    // Recibir el JSON del fetch
+    $input = json_decode(file_get_contents("php://input"), true);
+
+    $nombre = $input['nombre'] ?? '';
+    $materia = $input['materia'] ?? '';
+
+    if (empty($nombre) || empty($materia)) {
+        echo json_encode(["success" => false, "message" => "Faltan datos"]);
         exit;
     }
+
     $conn = conectar_bd();
-    $sql = "INSERT INTO profesores (nombre, apellido) VALUES (?, ?)";
+    $sql = "INSERT INTO profesores (nombre, materia) VALUES (?, ?)";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("ss", $nombre, $apellido);
+    $stmt->bind_param("ss", $nombre, $materia);
+
     if ($stmt->execute()) {
-        echo "Profesor registrado correctamente.";
+        echo json_encode(["success" => true, "message" => "Profesor registrado correctamente."]);
     } else {
-        echo "Error al registrar el profesor.";
+        echo json_encode(["success" => false, "message" => "Error al registrar el profesor."]);
     }
+
     $stmt->close();
     $conn->close();
 } else {
-    echo "Método no permitido.";
+    echo json_encode(["success" => false, "message" => "Método no permitido"]);
 }
 ?>
+
