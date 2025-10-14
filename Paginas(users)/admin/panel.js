@@ -16,6 +16,12 @@ function toggleDarkMode() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+    const logout = document.getElementById('logout');
+
+    logout.addEventListener('click', () => {
+        sessionStorage.clear(); // Limpiar datos de sesión
+        window.location.href = "../../inicio/menu.html"; // redirigir a pagina de inicio de sesion
+    });
 
     window.showBox = function() {
         if (document.getElementById('overlay')) return;
@@ -95,6 +101,11 @@ function updateTableHeaders() {
             const titleEl = document.querySelector('.botones div[style*="grid-area: e;"] h1');
             if (titleEl && data.title) {
                 titleEl.innerText = data.title;
+            }
+
+            const logout = document.querySelector('#logout');
+            if (logout && data.logout) {
+                logout.textContent = data.logout;
             }
 
             // Tabla de horarios

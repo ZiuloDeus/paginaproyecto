@@ -42,6 +42,15 @@ header div[name="derecha"] {
     gap: 10px;
 }
 
+#logout {
+    background-color:#0a9396;
+    color: white;
+    border: none;
+    padding: 5px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
 .container {
     display: flex;
     flex-grow: 1;
