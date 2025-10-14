@@ -142,7 +142,7 @@ function setupBuscador(inputId, resultadosId, phpFile, mostrarCallback) {
 
 // Ejemplo de uso para profesores:
 setupBuscador(
-    'busqueda_pro',      // id del input
+    'id_profesor',      // id del input
     'resultados_pro',    // id del ul
     'buscador_pro.php',  // archivo PHP
     prof => prof.nombre + ' ' + (prof.apellido || '')
@@ -150,7 +150,7 @@ setupBuscador(
 
 // Para asignaturas:
 setupBuscador(
-    'busqueda_asi',
+    'id_materia',
     'resultados_asi',
     'buscador_asignaturas.php',
     asi => asi.nombre
@@ -158,33 +158,137 @@ setupBuscador(
 
 // Para grupos:
 setupBuscador(
-    'busqueda_gru',
+    'id_grupos',
     'resultados_gru',
     'buscador_grupos.php',
     gru => gru.nombre
 );
 
-function abrirModal() {
-  document.getElementById('modalMateria').style.display = 'flex';
+function abrirModal(tipo) {
+  if (tipo === 'grupo') {
+    var modalGrupo = document.getElementById('modalGrupo');
+    if (modalGrupo) modalGrupo.style.display = 'flex';
+  } else if (tipo === 'materia') {
+    var modalMateria = document.getElementById('modalMateria');
+    if (modalMateria) modalMateria.style.display = 'flex';
+  } else if (tipo === 'pro') {
+    var modalPro = document.getElementById('modalPro');
+    if (modalPro) modalPro.style.display = 'flex';
+  }
 }
-function cerrarModal() {
-  document.getElementById('modalMateria').style.display = 'none';
-  document.getElementById('mensajeMateria').innerText = '';
+function cerrarModal(tipo) {
+  if (tipo === 'grupo') {
+    var modalGrupo = document.getElementById('modalGrupo');
+    if (modalGrupo) {
+      modalGrupo.style.display = 'none';
+      var mensajeGrupo = document.getElementById('mensajeGrupo');
+      if (mensajeGrupo) mensajeGrupo.innerText = '';
+    }
+  } else if (tipo === 'materia') {
+    var modalMateria = document.getElementById('modalMateria');
+    if (modalMateria) {
+      modalMateria.style.display = 'none';
+      var mensajeMateria = document.getElementById('mensajeMateria');
+      if (mensajeMateria) mensajeMateria.innerText = '';
+    }
+  } else if (tipo === 'pro') {
+    var modalPro = document.getElementById('modalPro');
+    if (modalPro) {
+      modalPro.style.display = 'none';
+      var mensajePro = document.getElementById('mensajePro');
+      if (mensajePro) mensajePro.innerText = '';
+    }
+  }
 }
 
+// --- FORMULARIO MATERIA ---
 document.addEventListener('DOMContentLoaded', function() {
-  document.getElementById('formMateria').addEventListener('submit', function(e) {
+  const formMateria = document.getElementById('formMateria');
+  if (formMateria) {
+    formMateria.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const nombre = this.nombre.value;
+      fetch("registrar_materia.php", {
+        method: 'POST',
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        body: 'nombre=' + encodeURIComponent(nombre)
+      })
+      .then(res => res.text())
+      .then(data => {
+        mostrarNotificacion(data, data.includes('correctamente') ? 'success' : 'error');
+        document.getElementById('mensajeMateria').innerText = data;
+        this.reset();
+      })
+      .catch(() => {
+        mostrarNotificacion('Error al conectar con el servidor.', 'error');
+        document.getElementById('mensajeMateria').innerText = 'Error al conectar con el servidor.';
+      });
+    });
+  }
+
+  // --- FORMULARIO GRUPO ---
+const formGrupo = document.getElementById('formGrupo');
+if (formGrupo) {
+  formGrupo.addEventListener('submit', function(e) {
     e.preventDefault();
+
     const nombre = this.nombre.value;
-    fetch("registrar_materia.php", {
+
+    fetch("registrar_grupo.php", {
       method: 'POST',
-      headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: 'nombre=' + encodeURIComponent(nombre)
     })
-    .then(res => res.text())
+    .then(res => res.json())
     .then(data => {
-      document.getElementById('mensajeMateria').innerText = data;
-      this.reset();
+      // Mostrar mensaje y notificación
+      document.getElementById('mensajeGrupo').innerText = data.message;
+      mostrarNotificacion(data.message, data.success ? 'success' : 'error');
+
+      if (data.success) {
+        this.reset();
+      }
+    })
+    .catch(() => {
+      mostrarNotificacion('Error al conectar con el servidor.', 'error');
+      document.getElementById('mensajeGrupo').innerText = 'Error al conectar con el servidor.';
     });
   });
+}
+
+  // --- FORMULARIO PROFESOR ---
+  const formPro = document.getElementById('formPro');
+  if (formPro) {
+    formPro.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const nombre = this.nombre.value;
+      const apellido = this.apellido.value;
+      fetch("registrar_pro.php", {
+        method: 'POST',
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        body: 'nombre=' + encodeURIComponent(nombre) + '&apellido=' + encodeURIComponent(apellido)
+      })
+      .then(res => res.text())
+      .then(data => {
+        mostrarNotificacion(data, data.includes('correctamente') ? 'success' : 'error');
+        document.getElementById('mensajePro').innerText = data;
+        this.reset();
+      })
+      .catch(() => {
+        mostrarNotificacion('Error al conectar con el servidor.', 'error');
+        document.getElementById('mensajePro').innerText = 'Error al conectar con el servidor.';
+      });
+    });
+  }
 });
+
+// --- Notificación flotante ---
+function mostrarNotificacion(mensaje, tipo) {
+  let notif = document.createElement('div');
+  notif.className = 'notificacion-flotante ' + tipo;
+  notif.innerText = mensaje;
+  document.body.appendChild(notif);
+  setTimeout(() => {
+    notif.remove();
+  }, 2500);
+}
