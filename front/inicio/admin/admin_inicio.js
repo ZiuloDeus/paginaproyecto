@@ -4,7 +4,6 @@ document.body.innerHTML = `
     <label>Cédula:<br><input type="number" name="cedula" required></label><br><br>
     <label>Contraseña:<br><input type="password" name="password" required></label><br><br>
     <button type="submit">Entrar</button>
-    <button type="button" id="irRegistro">Registrarse</button>
   </form>
   <div id="loginMsg" class="hidden"></div>
 `;

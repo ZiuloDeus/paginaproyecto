@@ -56,7 +56,7 @@ loginForm.addEventListener('submit', function(e) {
     return;
   }
   showMessage('Inicio de sesión exitoso!' , 'success');
-  window.location.href = '../Paginas(users)/profe/panel.html' // redirigir a pagina principal de admin
+  window.location.href = '../profe/panel.html' // redirigir a pagina principal de admin
 });
 
 document.getElementById('irRegistro').addEventListener('click', function() {
