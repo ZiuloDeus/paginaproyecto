@@ -62,3 +62,4 @@ loginForm.addEventListener('submit', function(e) {
 document.getElementById('irRegistro').addEventListener('click', function() {
   window.location.href = '../registro/registro.html'; // redirigir a pagina de registro
 });
+
