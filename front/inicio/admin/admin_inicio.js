@@ -58,7 +58,3 @@ loginForm.addEventListener('submit', function(e) {
   showMessage('Inicio de sesión exitoso!' , 'success');
   window.location.href = 'panel.html' // redirigir a pagina principal de admin
 });
-
-document.getElementById('irRegistro').addEventListener('click', function() {
-  window.location.href = '../registro/registro.html'; // redirigir a pagina de registro
-});
