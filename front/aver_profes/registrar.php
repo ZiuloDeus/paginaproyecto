@@ -1,5 +1,8 @@
 <?php
-require_once 'conectar.php';
+require_once __DIR__ . '/../../back/conexion/conexion.php';
+error_reporting(E_ALL); 
+ini_set('display_errors', 1);
+
 $conn = conectar_bd();
 ?>
 <!DOCTYPE html>
