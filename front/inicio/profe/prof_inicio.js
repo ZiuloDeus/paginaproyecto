@@ -60,5 +60,5 @@ loginForm.addEventListener('submit', function(e) {
 });
 
 document.getElementById('irRegistro').addEventListener('click', function() {
-  window.location.href = 'C:\Users\Admin\Documents\GitHub\paginaproyecto\front\aver_profes';
+  window.location.href = '../registro/registro.html'; // redirigir a pagina de registro
 });

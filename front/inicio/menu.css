@@ -1,8 +1,111 @@
-body {
-    font-family: Arial;
+
+/* Estilos globales */
+* {
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%; /* Asegura que el cuerpo ocupe toda la altura */
+}
+
+body {
+    background-color: white;
+    background-image: linear-gradient(#91C4C3 1px, transparent 1px), linear-gradient(to right, #91C4C3 1px, #DEDED1 1px);
+    background-size: 20px 20px;
+    display: flex;
+    flex-direction: column;
+    font-family: Arial, sans-serif;
+    color: #333;
+    transition: background-color 0.3s, background-image 0.3s, color 0.3s; /* Transición suave para el cambio de modo */
+}
+
+header {
+    background-color: #002c59;
+    padding: 10px;
+    height: 10vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+}
+
+header div[name="izquierda"] {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+header div[name="derecha"] {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#logout {
+    background-color:#0a9396;
+    color: white;
+    border: none;
+    padding: 5px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.container {
+    display: flex;
+    flex-grow: 1;
+    height: 90vh; /* Asegura que el contenedor ocupe el resto de la pantalla */
+}
+
+aside {
+    background-color: #002c59;
+    width: 100px; /* Reducir el ancho del aside */
+    padding: 10px;
+    flex-shrink: 0;
+    height: 100%; /* Asegura que la barra lateral ocupe toda la altura */
+}
+
+aside nav ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+}
+
+aside nav ul li {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+aside nav ul li img {
+    width: 40px;
+    height: 40px;
+    filter: invert(1); /* Íconos blancos por defecto */
+    transition: filter 0.3s ease;
+}
+
+aside nav ul li img:hover {
+    filter: invert(0); /* Íconos negros al pasar el mouse */
+}
+
+aside nav ul li p {
+    margin-top: 5px;
+    color: white;
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+main {
+    flex-grow: 1;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center; /* Centra los botones verticalmente */
 }
 
 header {
@@ -67,4 +170,104 @@ button img {
 button:hover {
     background-color: #aebdcc; 
     color: black;
+}
+
+/* Ventana modal */
+.modal {
+    position: fixed;
+    z-index: 1000;
+    left: 0; top: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.5);
+    display: flex; align-items: center; justify-content: center;
+  }
+
+.modal-content {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    min-width: 300px;
+    position: relative;
+    }
+
+.close {
+    position: absolute;
+    right: 10px; top: 10px;
+    cursor: pointer;
+    font-size: 24px;
+  }
+
+  /* Estilos para el modal */
+.modal {
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    display: none;
+}
+
+.modal-content {
+    background-color: white;
+    margin: 10% auto;
+    padding: 20px;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 400px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.modal-content h2 {
+    color: #333;
+    margin-bottom: 15px;
+    font-size: 20px;
+}
+
+/* Estilos para inputs dentro del modal */
+.modal-content input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+.modal-content input:focus {
+    outline: none;
+    border-color: #0066cc;
+}
+
+/* Botón de cerrar */
+.close {
+    color: #999;
+    float: right;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover {
+    color: #333;
+}
+
+#customBox {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px;
+    height: 150px;
+    background-color: #002c59;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
 }
