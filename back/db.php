@@ -2,9 +2,9 @@
 function conectarBd() : ?mysqli
 {
     $servername = "localhost"; // Or your database host
-    $username = "root";
-    $password = "";
-    $dbname = "proyecto_itsp";
+    $username = "db_Sistematizacion_de_datos";
+    $password = "54321";
+    $dbname = "Sistematizacion_de_datos";
 
     // Create connection
     $conn = mysqli_connect($servername, $username, $password, $dbname);
