@@ -56,9 +56,9 @@ loginForm.addEventListener('submit', function(e) {
     return;
   }
   showMessage('Inicio de sesión exitoso!' , 'success');
-  window.location.href = '../profe/panel.html' // redirigir a pagina principal de admin
+  window.location.href = 'panel.html' // redirigir a pagina principal de admin
 });
 
 document.getElementById('irRegistro').addEventListener('click', function() {
-  window.location.href = '../registro/registro.html'; // redirigir a pagina de registro
+  window.location.href = '../../aver_profes/registrar.php'; // redirigir a pagina de registro
 });
