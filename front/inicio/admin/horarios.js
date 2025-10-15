@@ -1,32 +1,39 @@
 document.addEventListener("DOMContentLoaded", () => {
-  fetch("mostrar_horarios.php")
-    .then(res => res.json())
-    .then(data => {
-      const tabla = document.getElementById("tabla-horarios");
+  const input = document.getElementById("buscarGrupo");
+  const tbody = document.querySelector("#tablaHorarios tbody");
 
-      // agrupamos los horarios por día
-      const dias = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes"];
-      const agrupados = {};
+  input.addEventListener("input", () => {
+    const grupo = input.value.trim();
+    if (grupo === "") {
+      tbody.innerHTML = "<tr><td colspan='5' style='text-align:center;'>Ingrese un grupo para ver su horario</td></tr>";
+      return;
+    }
 
-      dias.forEach(d => agrupados[d] = []);
+    fetch(`horarios.php?grupo=${encodeURIComponent(grupo)}`)
+      .then(res => res.json())
+      .then(data => {
+        tbody.innerHTML = "";
 
-      data.forEach(h => {
-        if (agrupados[h.dia]) agrupados[h.dia].push(h.materia + " (" + h.hora + ")");
+        if (data.success) {
+          const fila = data.data;
+          const tr = document.createElement("tr");
+          tr.innerHTML = `
+            <td>${fila.lunes}</td>
+            <td>${fila.martes}</td>
+            <td>${fila.miercoles}</td>
+            <td>${fila.jueves}</td>
+            <td>${fila.viernes}</td>
+          `;
+          tbody.appendChild(tr);
+        } else {
+          tbody.innerHTML = `<tr><td colspan='5' style='text-align:center;'>${data.message || data.error}</td></tr>`;
+        }
+      })
+      .catch(err => {
+        console.error(err);
+        tbody.innerHTML = "<tr><td colspan='5' style='text-align:center;'>Error al cargar datos</td></tr>";
       });
+  });
 
-      // Determinamos cuántas filas máximo hay que crear
-      const maxFilas = Math.max(...Object.values(agrupados).map(a => a.length));
-
-      for (let i = 0; i < maxFilas; i++) {
-        const fila = document.createElement("tr");
-        dias.forEach(dia => {
-          const celda = document.createElement("td");
-          celda.textContent = agrupados[dia][i] || ""; // vacío si no hay dato
-          fila.appendChild(celda);
-        });
-        tabla.appendChild(fila);
-      }
-    })
-    .catch(err => console.error("Error cargando horarios:", err));
+  tbody.innerHTML = "<tr><td colspan='5' style='text-align:center;'>Ingrese un grupo para ver su horario</td></tr>";
 });
-
