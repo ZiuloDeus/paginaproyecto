@@ -53,7 +53,7 @@ loginForm.addEventListener('submit', function(e) {
   }
   if (usuario.password !== password) {
     showMessage('Contraseña incorrecta.' , 'error');
-    return;
+    return; 
   }
   showMessage('Inicio de sesión exitoso!' , 'success');
   window.location.href = '../Paginas(users)/admin/panel.html' // redirigir a pagina principal de admin
