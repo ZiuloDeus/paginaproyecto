@@ -61,3 +61,33 @@ body {
 #Registro button[type="button"]:hover {
   background: #ebdbc5;
 }
+/*movil*/
+@media (max-width: 479px) {
+    .grid-container {
+      grid-template-columns: 1fr;
+      grid-template-areas:
+        "left"
+        "right-top"
+        "right-bottom";
+    }
+  }
+  
+  /*talet*/
+  @media (min-width: 480px) and (max-width: 768px) {
+    .grid-container {
+      grid-template-columns: 1fr 1fr;
+      grid-template-areas:
+        "left left"
+        "right-top right-bottom";
+    }
+  }
+  
+  /*Compu*/
+  @media (min-width: 769px) {
+    .grid-container {
+      grid-template-columns: 25% 40%;
+      grid-template-areas:
+        "left right-top"
+        "left right-bottom";
+    }
+  }
