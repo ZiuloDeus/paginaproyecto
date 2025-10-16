@@ -60,5 +60,7 @@ loginForm.addEventListener('submit', function(e) {
 });
 
 document.getElementById('irRegistro').addEventListener('click', function() {
-  window.location.href = 'front\aver_profes\registrar.php'; // redirigir a pagina de registro
+  let a = document.createElement('a')
+  a.href = '../../aver_profes/registrar.php'; //redirigir a pagina de registro
+  a.click();
 });
