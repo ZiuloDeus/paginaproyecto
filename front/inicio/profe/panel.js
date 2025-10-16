@@ -1,8 +1,13 @@
-let currentLang = "es";
-let isDarkMode = false;
+let currentLang = localStorage.getItem('lang') || 'es'; // cargar lenguaje guardado, si no hay uno usar español por defecto
+let isDarkMode = localStorage.getItem('darkMode') === "true"; // cargar modo oscuro o claro guardado
 
 function toggleDarkMode() {
     isDarkMode = !isDarkMode;
+    localStorage.setItem('darkMode', isDarkMode);
+    applyDarkMode();
+}
+
+function applyDarkMode() {
     if (isDarkMode) {
         document.body.style.backgroundColor = '#121212';
         document.body.style.backgroundImage = 'none';
@@ -15,7 +20,17 @@ function toggleDarkMode() {
     }
 }
 
+function changeLanguage() {
+    currentLang = currentLang === "es" ? "en" : "es";
+    localStorage.setItem('lang', currentLang);
+    updateTableHeaders();
+}
+
 document.addEventListener("DOMContentLoaded", () => {
+    // aplicar preferencias guardadas
+    applyDarkMode();
+    updateTableHeaders();
+
     const logout = document.getElementById('logout');
 
     logout.addEventListener('click', () => {
@@ -44,9 +59,9 @@ document.addEventListener("DOMContentLoaded", () => {
         const langButton = document.createElement('button');
         langButton.style.backgroundColor = '#1d3557';
         langButton.textContent = (currentLang === "es") ? "English" : "Español";
+        // Actualizar etiquetas al cambiar idioma
         langButton.onclick = () => {
-            currentLang = currentLang === "es" ? "en" : "es";
-            updateTableHeaders();
+            changeLanguage();
             updateModalLabels(darkModeButton, langButton, closeButton);
         };
 

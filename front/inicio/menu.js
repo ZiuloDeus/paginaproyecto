@@ -1,8 +1,20 @@
-let currentLang = "es";
-let isDarkMode = false;
+let currentLang = localStorage.getItem('lang') || 'es'; // cargar lenguaje guardado, si no hay uno usar español por defecto
+let isDarkMode = localStorage.getItem('darkMode') === "true"; // cargar modo oscuro o claro guardado
 
 function toggleDarkMode() {
     isDarkMode = !isDarkMode;
+    localStorage.setItem('darkMode', isDarkMode);
+    applyDarkMode();
+}
+
+function changeLanguage() {
+    currentLang = currentLang === "es" ? "en" : "es";
+    localStorage.setItem('lang', currentLang);
+    updateTableHeaders();
+}
+
+
+function applyDarkMode() {
     if (isDarkMode) {
         document.body.style.backgroundColor = '#121212';
         document.body.style.backgroundImage = 'none';
@@ -16,6 +28,9 @@ function toggleDarkMode() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+        // aplicar preferencias guardadas
+        applyDarkMode();
+        updateTableHeaders();
 
     window.showBox = function() {
         if (document.getElementById('overlay')) return;
@@ -38,8 +53,7 @@ document.addEventListener("DOMContentLoaded", () => {
         langButton.style.backgroundColor = '#1d3557';
         langButton.textContent = (currentLang === "es") ? "English" : "Español";
         langButton.onclick = () => {
-            currentLang = currentLang === "es" ? "en" : "es";
-            updateTableHeaders();
+            changeLanguage();
             updateModalLabels(darkModeButton, langButton, closeButton);
         };
 
