@@ -115,8 +115,8 @@ function updateTableHeaders() {
 }
 
 // buscador.js
-function setupBuscador(inputId, resultadosId, phpFile, mostrarCallback) {
-    const input = document.getElementById(inputId);
+function setupBuscador(id_materia, resultadosId, phpFile, mostrarCallback) {
+    const input = document.getElementById(id_materia);
     const resultados = document.getElementById(resultadosId);
 
     if (!input || !resultados) return;
