@@ -1,93 +1,71 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Horarios</title>
-    <link rel="stylesheet" href="panel.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Horarios por Grupo</title>
+  <link rel="stylesheet" href="panel.css">
 </head>
 <body>
-    <header>
-        <div name="izquierda">
-            <h2>Logo</h2>
-        </div>
-        <div name="derecha">
-            <p>Nombre del Admin</p>
-            <img src="person-circle.svg" alt="Avatar" style="width:40px; height:40px; border-radius:50%;">
-            <button id="logout"> Cerrar Sesión </button>
-        </div>
-    </header>
-    <div class="container">
-        <aside>
-            <nav>
-                <ul>
-                    <li>
-                        <a href="panel.html"><img src="arrow-left-circle-fill.svg" alt="Back"></a>
-                        <p>Regresar</p>
-                    </li>
-                    <li>
-                        <a href="aulas.html"><img src="event-fill.svg" alt="Aulas/etc"></a>
-                        <p>Salones/Aulas</p>
-                    </li>
-                    <li>
-                        <img src="resources-fill.svg" alt="Recursos">
-                        <p>Recursos</p>
-                    </li>
-                    <li onclick="window.showBox()">
-                        <img src="gear-fill.svg" alt="Configuración">
-                        <p>Configuración</p>
-                    </li>
-                </ul>
-            </nav>
-        </aside>
-        <main>
-            <table>
-                   <tr>
-                      <th id="th-lunes">Lunes</th>
-                      <th id="th-martes">Martes</th>
-                      <th id="th-miercoles">Miércoles</th>
-                      <th id="th-jueves">Jueves</th>
-                      <th id="th-viernes">Viernes</th>
-                    </tr>
-                    <tr>
-                      <td>.</td>
-                      <td>.</td>
-                      <td>.</td>
-                      <td>.</td>
-                      <td>.</td>
-                    </tr>
-                    <tr>
-                      <td>.</td>
-                      <td>.</td>
-                      <td>.</td>
-                      <td>.</td>
-                      <td>.</td>
-                    </tr>
-                    <tr>
-                      <td>.</td>
-                      <td>.</td>
-                      <td>.</td>
-                      <td>.</td>
-                      <td>.</td>
-                    </tr>
+  <header>
+    <div name="izquierda">
+      <h2>Logo</h2>
+    </div>
+    <div name="derecha">
+      <p>Nombre del Docente</p>
+      <img src="person-circle.svg" alt="Avatar" style="width:40px; height:40px; border-radius:50%;">
+    </div>
+  </header>
 
-                    <tr>
-                        <td>.</td>
-                        <td>.</td>
-                        <td>.</td>
-                        <td>.</td>
-                        <td>.</td>
-                      </tr>
+  <div class="container">
+    <aside>
+      <nav>
+        <ul>
+          <li>
+            <a href="panel.html"><img src="arrow-left-circle-fill.svg" alt="Back"></a>
+            <p>Regresar</p>
+          </li>
+          <li>
+            <a href="aulas.html" ><img src="event-fill.svg" alt="Aulas/etc"></a>
+            <p>Salones/Aulas</p>
+          </li>
+          <li>
+            <a href="recursos.html"><img src="resources-fill.svg" alt="Recursos"></a>
+            <p>Recursos</p>
+          </li>
+          <li onclick="showBox()">
+            <img src="gear-fill.svg" alt="Configuración">
+            <p>Configuración</p>
+          </li>
+        </ul>
+      </nav>
+    </aside>
 
-                      <tr>
-                        <td>.</td>
-                        <td>.</td>
-                        <td>.</td>
-                        <td>.</td>
-                        <td>.</td>
-                      </tr>
-            </table>
-            <script src="panel.js" defer></script>
-            <script src="../preferencias.js" defer></script>
+   <main>
+     <div class="contenido-horarios">
+     <div class="buscador-horarios">
+      <h1>Buscar horario por grupo</h1>
+      <input type="text" id="buscarGrupo" placeholder="Ingrese el nombre del grupo...">
+     </div>
+
+     <table id="tablaHorarios">
+      <thead>
+        <tr>
+          <th>Lunes</th>
+          <th>Martes</th>
+          <th>Miércoles</th>
+          <th>Jueves</th>
+          <th>Viernes</th>
+        </tr>
+      </thead>
+     <tbody></tbody>
+     </table>
+  </div>
+</main>
+
+  </div>
+  <script src="horarios.js" defer></script>
+  <script src="panel.js" defer></script>
+  <script src="../preferencias.js" defer></script>
 </body>
 </html>
