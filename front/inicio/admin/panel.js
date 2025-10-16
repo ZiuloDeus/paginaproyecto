@@ -20,13 +20,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
     logout.addEventListener('click', () => {
         sessionStorage.clear(); // Limpiar datos de sesión
-        window.location.href = "../../inicio/menu.html"; // redirigir a pagina de inicio de sesion
+        window.location.href = "../../inicio/index.html"; // redirigir a pagina de inicio de sesion
     });
 
     window.showBox = function() {
         if (document.getElementById('overlay')) return;
 
-        const overlay = document.createElement('div');
+        const overlay = document.createElement('div');  
         overlay.id = 'overlay';
         overlay.onclick = closeBox;
 
