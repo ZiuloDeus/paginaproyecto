@@ -155,7 +155,7 @@ function setupBuscador(inputId, resultadosId, phpFile, mostrarCallback) {
     });
 }
 
-// Ejemplo de uso para profesores:
+//  Para profesores:
 setupBuscador(
     'id_profesor',      // id del input
     'resultados_pro',    // id del ul
@@ -190,6 +190,10 @@ function abrirModal(tipo) {
     var modalPro = document.getElementById('modalPro');
     if (modalPro) modalPro.style.display = 'flex';
   }
+   else if (tipo === 'horario') {
+    var modalPro = document.getElementById('modalHorario');
+    if (modalPro) modalPro.style.display = 'flex';
+  }
 }
 function cerrarModal(tipo) {
   if (tipo === 'grupo') {
@@ -211,6 +215,14 @@ function cerrarModal(tipo) {
     if (modalPro) {
       modalPro.style.display = 'none';
       var mensajePro = document.getElementById('mensajePro');
+      if (mensajePro) mensajePro.innerText = '';
+    }
+  }
+  else if (tipo === 'horario') {
+    var modalPro = document.getElementById('modalHorario');
+    if (modalPro) {
+      modalPro.style.display = 'none';
+      var mensajePro = document.getElementById('mensajeHorario');
       if (mensajePro) mensajePro.innerText = '';
     }
   }
@@ -308,7 +320,6 @@ function mostrarNotificacion(mensaje, tipo) {
   }, 2500);
 }
 
-// Arreglo con los IDs de las tablas
 const tablas = ['tabla-aulas', 'tabla-salones'];
 
 tablas.forEach(id => {
