@@ -18,21 +18,31 @@
   </header>
 
   <div class="container">
-    <aside>
-      <nav>
-        <ul>  
-          <li>
-            <a href="panel.html"><img src="arrow-left-circle-fill.svg" alt="Volver"></a>
-            <p>Regresar</p>
-          </li>
-        </ul>
-      </nav>
-    </aside>
-
-    <main>
+        <aside>
+            <nav>
+                <ul>
+                    <li>
+                        <a href="horarios.html"><img src="calendar-fill.svg" alt="Horarios"></a>
+                        <p>Horarios</p>
+                    </li>
+                    <li>
+                        <a href="aulas.html" ><img src="event-fill.svg" alt="Aulas/etc"></a>
+                        <p>Salones/Aulas</p>
+                    </li>
+                    <li>
+                        <a href="recursos.html"><img src="resources-fill.svg" alt="Recursos"></a>
+                        <p>Recursos</p>
+                    </li>
+                    <li onclick="showBox()">
+                        <img src="gear-fill.svg" alt="Configuración">
+                        <p>Configuración</p>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+  <main>
       <div class="texto">
         <h1>Lista de Profesores</h1>
-
         <!-- Tabla solo muestra los datos -->
         <table id="tabla-profesores">
           <thead>
@@ -47,7 +57,7 @@
 
         <button id="btnAgregarProfe">Agregar Profesor</button>
       </div>
-    </main>
+  </main>
   </div>
 
   <!-- Modal para agregar profesor -->
