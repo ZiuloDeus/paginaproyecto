@@ -47,7 +47,7 @@
       <h1>Buscar horario por grupo</h1>
       <input type="text" id="buscarGrupo" placeholder="Ingrese el nombre del grupo...">
       <ul id="resultados_gru"></ul>
-      <button type="button" onclick="abrirModal('horario')">Agregar horario</button>
+      <button id="btnAgregarHorario" type="button" onclick="abrirModal('horario')">Agregar horario</button>
      </div>
 
      <table id="tablaHorarios">
@@ -67,14 +67,16 @@
   <script src="horarios.js" defer></script>
   <script src="panel.js" defer></script>
   <script src="../preferencias.js" defer></script>
-  <!-- Modal para agregar horario -->
-<div id="modalHorario" class="modal">
-  <div class="modal-contenido">
-    <span class="cerrar" onclick="cerrarModal('horario')">&times;</span>
+
+  <div id="modalHorario" class="modal-horarios">
+  <div class="modal-content-horarios">
+    <span class="close-horarios" onclick="cerrarModal('horario')">&times;</span>
     <h2>Agregar horario</h2>
     <p id="mensajeHorario"></p>
-    <!-- Aquí ponés tu formulario o inputs -->
+    <input type="text" placeholder="Ejemplo: Grupo A o Materia" />
+    <button type="button">Guardar</button>
   </div>
 </div>
+
 </body>
 </html>

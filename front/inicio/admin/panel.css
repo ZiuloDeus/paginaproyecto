@@ -423,7 +423,7 @@ button:hover {
 }
 
 .modal-content h2 {
-    color: #333;
+    color: #242424;
     margin-bottom: 15px;
     font-size: 20px;
 }
@@ -618,7 +618,6 @@ button:hover {
   width: 100%;
 }
 
-/* Ya tenés esto, pero asegúrate que esté centrado y prolijo */
 .buscador {
   background: white;
   padding: 25px;
@@ -725,6 +724,7 @@ button:hover {
 .close-horarios:hover {
   color: #000;
 }
+
  /*movil*/
 @media (max-width: 479px) {
     .grid-container {

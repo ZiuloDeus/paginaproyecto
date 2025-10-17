@@ -37,3 +37,27 @@ document.addEventListener("DOMContentLoaded", () => {
 
   tbody.innerHTML = "<tr><td colspan='5' style='text-align:center;'>Ingrese un grupo para ver su horario</td></tr>";
 });
+
+function abrirModal(tipo) {
+  if (tipo === 'horario') {
+    const modal = document.getElementById('modalHorario');
+    if (modal) modal.style.display = 'flex';
+  }
+}
+
+function cerrarModal(tipo) {
+  if (tipo === 'horario') {
+    const modal = document.getElementById('modalHorario');
+    if (modal) modal.style.display = 'none';
+    const mensaje = document.getElementById('mensajeHorario');
+    if (mensaje) mensaje.innerText = '';
+  }
+}
+
+// Cerrar modal si se hace clic fuera del contenido
+window.addEventListener('click', function (e) {
+  const modal = document.getElementById('modalHorario');
+  if (e.target === modal) {
+    modal.style.display = 'none';
+  }
+});
