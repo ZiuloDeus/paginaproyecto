@@ -155,30 +155,6 @@ function setupBuscador(inputId, resultadosId, phpFile, mostrarCallback) {
     });
 }
 
-  //  Para profesores:
-  setupBuscador(
-      'id_profesor',      // id del input
-      'resultados_pro',    // id del ul
-      'buscador_pro.php',  // archivo PHP
-      prof => prof.nombre + ' ' + (prof.apellido || '')
-  );
-
-  // Para asignaturas:
-  setupBuscador(
-      'id_materia',
-      'resultados_asi',
-      'buscador_asignaturas.php',
-      asi => asi.nombre
-  );
-
-  // Para grupos:
-  setupBuscador(
-      'id_grupos',
-      'resultados_gru',
-      'buscador_grupos.php',
-      gru => gru.nombre
-  );
-
   function abrirModal(tipo) {
     if (tipo === 'grupo') {
       var modalGrupo = document.getElementById('modalGrupo');
