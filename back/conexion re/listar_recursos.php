@@ -1,9 +1,9 @@
 <?php
-require_once dirname(__FILE__).'/conexion.php';
+require_once dirname(__FILE__).'/../conexion/conexion.php';
 $conn = conectar_bd();
 header('Content-Type: application/json');
 
-$sql = "SELECT id_recurso, tipo, estado FROM recursos";
+$sql = "SELECT * FROM Recursos";
 $result = $conn->query($sql);
 $recursos = [];
 if ($result) {

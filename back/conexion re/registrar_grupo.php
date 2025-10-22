@@ -1,5 +1,5 @@
 <?php
-require_once dirname(__FILE__).'/conexion.php';
+require_once dirname(__FILE__).'/../conexion/conexion.php';
 $conn = conectar_bd();
 
 header('Content-Type: application/json');
@@ -11,7 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
     // Ajusta el nombre de la tabla si es diferente
-    $sql = "INSERT INTO grupos (nombre) VALUES (?)";
+    $sql = "INSERT INTO Grupos (nombre) VALUES (?)";
     $stmt = $conn->prepare($sql);
     if ($stmt) {
         $stmt->bind_param('s', $nombre);
