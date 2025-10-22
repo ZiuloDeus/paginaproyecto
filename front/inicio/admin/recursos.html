@@ -47,7 +47,7 @@
             <tr>
               <th>ID</th>
               <th>Tipo</th>
-              <th>Estado</th>
+              <th style="text-align:center;">Estado</th>
             </tr>
           </thead>
           <tbody></tbody>
@@ -62,6 +62,11 @@
       <form id="formRecurso">
         <input type="number" name="id_recurso" placeholder="ID de recurso" required>
         <input type="text" name="tipo" placeholder="Tipo de recurso" required>
+        <select name="estado" required>
+          <option value="disponible">Disponible</option>
+          <option value="pedido">Pedido</option>
+          <option value="averiado">Averiado</option>
+        </select>
         <button type="submit">Agregar recurso</button>
       </form>
       <div id="mensajeRecurso"></div>
@@ -96,7 +101,7 @@
               tbody.innerHTML += `<tr>
                 <td>${r.id_recurso}</td>
                 <td>${r.tipo}</td>
-                <td class="${color}">${estado.charAt(0).toUpperCase() + estado.slice(1)}</td>
+                <td class="${color}" style="text-align:center;">${estado.charAt(0).toUpperCase() + estado.slice(1)}</td>
               </tr>`;
             });
           }
