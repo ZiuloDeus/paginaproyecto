@@ -42,7 +42,8 @@ CREATE TABLE Solicitantes (
 DROP TABLE IF EXISTS Profesores;
 CREATE TABLE Profesores (
 	id_profesor INT UNSIGNED PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    id_solicitante INT UNSIGNED NOT NULL
+    id_solicitante INT UNSIGNED NOT NULL,
+    id_usuario INT UNSIGNED NOT NULL
 );
 
 -- Usuario especifico, categorizacion de la tabla Solicitante
