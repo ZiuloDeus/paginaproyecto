@@ -74,39 +74,5 @@
   </div>
   <script src="panel.js" defer></script>
   <script src="../preferencias.js" defer></script>
-  <script>
-    function estadoColor(estado) {
-      if (estado === 'disponible') return 'verde';
-      if (estado === 'pedido') return 'amarillo';
-      if (estado === 'averiado') return 'rojo';
-      return '';
-    }
-    function cargarRecursos() {
-      fetch('listar_recursos.php')
-        .then(res => res.json())
-        .then(data => {
-          const ul = document.getElementById('listaRecursos');
-          ul.innerHTML = '';
-          const tbody = document.querySelector('#tablaRecursos tbody');
-          tbody.innerHTML = '';
-          if (data.length === 0) {
-            ul.innerHTML = '<li>No hay recursos registrados.</li>';
-            tbody.innerHTML = '<tr><td colspan="3">No hay recursos registrados.</td></tr>';
-          } else {
-            data.forEach(r => {
-              ul.innerHTML += `<li>${r.tipo}</li>`;
-              // Estado simulado: alterna entre disponible, pedido, averiado
-              let estado = r.estado || 'disponible';
-              let color = estadoColor(estado);
-              tbody.innerHTML += `<tr>
-                <td>${r.id_recurso}</td>
-                <td>${r.tipo}</td>
-                <td class="${color}" style="text-align:center;">${estado.charAt(0).toUpperCase() + estado.slice(1)}</td>
-              </tr>`;
-            });
-          }
-        });
-    }
-  </script>
 </body>
 </html>

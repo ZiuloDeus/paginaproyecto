@@ -346,7 +346,7 @@ function cargarRecursos() {
           tbody.innerHTML += `<tr>
             <td>${r.id_recurso}</td>
             <td>${r.tipo}</td>
-            <td class="${color}">${estado.charAt(0).toUpperCase() + estado.slice(1)}</td>
+            <td class="${color}" style="text-align:center;">${estado.charAt(0).toUpperCase() + estado.slice(1)}</td>
           </tr>`;
         });
       }
@@ -364,15 +364,18 @@ document.addEventListener('DOMContentLoaded', function() {
   }
   const closeRecurso = document.getElementById('closeRecurso');
   if (closeRecurso) {
-    closeRecurso.addEventListener('click', function() {
-      cerrarModal('recurso');
+    closeRecurso.addEventListener('click', function(e) {
+      e.preventDefault();
+      document.getElementById('modalRecurso').style.display = 'none';
+      document.getElementById('mensajeRecurso').innerText = '';
     });
   }
   const modalRecurso = document.getElementById('modalRecurso');
   if (modalRecurso) {
     modalRecurso.addEventListener('click', function(e) {
-      if (e.target === this) {
-        cerrarModal('recurso');
+      if (e.target === modalRecurso) {
+        document.getElementById('modalRecurso').style.display = 'none';
+        document.getElementById('mensajeRecurso').innerText = '';
       }
     });
   }
@@ -382,7 +385,7 @@ document.addEventListener('DOMContentLoaded', function() {
       e.preventDefault();
       const id_recurso = this.id_recurso.value;
       const tipo = this.tipo.value;
-      const estado = 'disponible'; // Por defecto
+      const estado = this.estado.value;
       fetch('agregar_recurso.php', {
         method: 'POST',
         headers: {'Content-Type': 'application/x-www-form-urlencoded'},
@@ -394,7 +397,10 @@ document.addEventListener('DOMContentLoaded', function() {
         if (data.success) {
           this.reset();
           cargarRecursos();
-          setTimeout(() => cerrarModal('recurso'), 1200);
+          setTimeout(() => {
+            document.getElementById('modalRecurso').style.display = 'none';
+            document.getElementById('mensajeRecurso').innerText = '';
+          }, 1200);
         }
       })
       .catch(() => {
