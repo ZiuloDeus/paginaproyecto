@@ -18,8 +18,8 @@
             <button id="logout"> Cerrar Sesión </button>
         </div>
     </header>
-  <div class="container">
-    <aside>
+  <div class="container" style="align-items: stretch;">
+    <aside style="height: 100vh; min-height: 100vh;">
       <nav>
         <ul>
           <li>
@@ -37,8 +37,71 @@
         </ul>
       </nav>
     </aside>
-</div>
-<script src="panel.js" defer></script>
-<script src="../preferencias.js" defer></script>
+    <main style="flex: 1; display: flex; justify-content: center; align-items: center;">
+      <div class="texto" style="display: flex; flex-direction: column; align-items: center; width: 100%; max-width: 700px;">
+        <h1>Lista de Recursos</h1>
+        <ul id="listaRecursos" style="width:100%;"></ul>
+        <button type="button" id="btnAgregarRecurso">Agregar recurso</button>
+        <table id="tablaRecursos" style="width:100%;margin-top:20px; text-align:center;">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Tipo</th>
+              <th>Estado</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </main>
+  </div>
+  <div id="modalRecurso" class="modal" style="display:none;">
+    <div class="modal-content">
+      <span class="close" id="closeRecurso">&times;</span>
+      <h2>Agregar Recurso</h2>
+      <form id="formRecurso">
+        <input type="number" name="id_recurso" placeholder="ID de recurso" required>
+        <input type="text" name="tipo" placeholder="Tipo de recurso" required>
+        <button type="submit">Agregar recurso</button>
+      </form>
+      <div id="mensajeRecurso"></div>
+    </div>
+  </div>
+  <script src="panel.js" defer></script>
+  <script src="../preferencias.js" defer></script>
+  <script>
+    function estadoColor(estado) {
+      if (estado === 'disponible') return 'verde';
+      if (estado === 'pedido') return 'amarillo';
+      if (estado === 'averiado') return 'rojo';
+      return '';
+    }
+    function cargarRecursos() {
+      fetch('listar_recursos.php')
+        .then(res => res.json())
+        .then(data => {
+          const ul = document.getElementById('listaRecursos');
+          ul.innerHTML = '';
+          const tbody = document.querySelector('#tablaRecursos tbody');
+          tbody.innerHTML = '';
+          if (data.length === 0) {
+            ul.innerHTML = '<li>No hay recursos registrados.</li>';
+            tbody.innerHTML = '<tr><td colspan="3">No hay recursos registrados.</td></tr>';
+          } else {
+            data.forEach(r => {
+              ul.innerHTML += `<li>${r.tipo}</li>`;
+              // Estado simulado: alterna entre disponible, pedido, averiado
+              let estado = r.estado || 'disponible';
+              let color = estadoColor(estado);
+              tbody.innerHTML += `<tr>
+                <td>${r.id_recurso}</td>
+                <td>${r.tipo}</td>
+                <td class="${color}">${estado.charAt(0).toUpperCase() + estado.slice(1)}</td>
+              </tr>`;
+            });
+          }
+        });
+    }
+  </script>
 </body>
 </html>

@@ -319,3 +319,87 @@ tablas.forEach(id => {
         }
     }
 });
+
+// --- RECURSOS MODAL Y TABLA ---
+function estadoColor(estado) {
+  if (estado === 'disponible') return 'verde';
+  if (estado === 'pedido') return 'amarillo';
+  if (estado === 'averiado') return 'rojo';
+  return '';
+}
+function cargarRecursos() {
+  fetch('listar_recursos.php')
+    .then(res => res.json())
+    .then(data => {
+      const ul = document.getElementById('listaRecursos');
+      ul.innerHTML = '';
+      const tbody = document.querySelector('#tablaRecursos tbody');
+      tbody.innerHTML = '';
+      if (data.length === 0) {
+        ul.innerHTML = '<li>No hay recursos registrados.</li>';
+        tbody.innerHTML = '<tr><td colspan="3">No hay recursos registrados.</td></tr>';
+      } else {
+        data.forEach(r => {
+          ul.innerHTML += `<li>${r.tipo}</li>`;
+          let estado = r.estado || 'disponible';
+          let color = estadoColor(estado);
+          tbody.innerHTML += `<tr>
+            <td>${r.id_recurso}</td>
+            <td>${r.tipo}</td>
+            <td class="${color}">${estado.charAt(0).toUpperCase() + estado.slice(1)}</td>
+          </tr>`;
+        });
+      }
+    });
+}
+window.cargarRecursos = cargarRecursos;
+
+document.addEventListener('DOMContentLoaded', function() {
+  cargarRecursos();
+  const btnAgregarRecurso = document.getElementById('btnAgregarRecurso');
+  if (btnAgregarRecurso) {
+    btnAgregarRecurso.addEventListener('click', function() {
+      document.getElementById('modalRecurso').style.display = 'flex';
+    });
+  }
+  const closeRecurso = document.getElementById('closeRecurso');
+  if (closeRecurso) {
+    closeRecurso.addEventListener('click', function() {
+      cerrarModal('recurso');
+    });
+  }
+  const modalRecurso = document.getElementById('modalRecurso');
+  if (modalRecurso) {
+    modalRecurso.addEventListener('click', function(e) {
+      if (e.target === this) {
+        cerrarModal('recurso');
+      }
+    });
+  }
+  const formRecurso = document.getElementById('formRecurso');
+  if (formRecurso) {
+    formRecurso.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const id_recurso = this.id_recurso.value;
+      const tipo = this.tipo.value;
+      const estado = 'disponible'; // Por defecto
+      fetch('agregar_recurso.php', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        body: 'id_recurso=' + encodeURIComponent(id_recurso) + '&tipo=' + encodeURIComponent(tipo) + '&estado=' + encodeURIComponent(estado)
+      })
+      .then(res => res.json())
+      .then(data => {
+        document.getElementById('mensajeRecurso').innerText = data.message;
+        if (data.success) {
+          this.reset();
+          cargarRecursos();
+          setTimeout(() => cerrarModal('recurso'), 1200);
+        }
+      })
+      .catch(() => {
+        document.getElementById('mensajeRecurso').innerText = 'Error al conectar con el servidor.';
+      });
+    });
+  }
+});
