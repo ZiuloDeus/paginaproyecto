@@ -7,7 +7,7 @@ USE proyecto_itsp;
 -- Datos de usuario base, compartido entre usuarios especificos
 DROP TABLE IF EXISTS Usuarios;
 CREATE TABLE Usuarios (
-	id_usuario INT UNSIGNED PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    id_usuario INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
     ci VARCHAR(8) UNIQUE NOT NULL,
     nombre VARCHAR(30) NOT NULL,
     apellido VARCHAR(30) NOT NULL,
@@ -41,8 +41,13 @@ CREATE TABLE Solicitantes (
 -- Usuario especifico, categorizacion de la tabla Solicitante
 DROP TABLE IF EXISTS Profesores;
 CREATE TABLE Profesores (
-	id_profesor INT UNSIGNED PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    id_solicitante INT UNSIGNED NOT NULL
+    id_profesor INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+    id_solicitante INT UNSIGNED NOT NULL,
+    id_usuario INT UNSIGNED NOT NULL,
+    CONSTRAINT fk_profesor_usuario
+        FOREIGN KEY (id_usuario)
+        REFERENCES Usuarios(id_usuario)
+        ON DELETE CASCADE
 );
 
 -- Usuario especifico, categorizacion de la tabla Solicitante
