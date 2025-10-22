@@ -14,7 +14,7 @@
         </div>
         <div name="derecha">
             <p>Nombre del Admin</p>
-            <img src="person-circle.svg" alt="Avatsar" style="width:40px; height:40px; border-radius:50%;">
+            <img src="person-circle.svg" alt="Avatar" style="width:40px; height:40px; border-radius:50%;">
         </div>
     </header>
     <div class="container">
@@ -26,8 +26,8 @@
                         <p>Regresar</p>
                     </li>
                     <li>
-                        <img src="aula.png" alt="Salones">    
-                        <p>Eventos</p>
+                        <img src="aula.png" alt="Salones">
+                        <p>Salones/Aulas</p>
                     </li>
                     <li>
                         <img src="recurso-educativo.png" alt="Recursos">
@@ -45,14 +45,14 @@
                 <button type="button" onclick="abrirModal('materia')">Agregar asignatura</button>
             </div>
         </main>
-            </div> 
-<div id="modalMateria" class="modal" style="display:none;">
+    </div>
+    <div id="modalMateria" class="modal" style="display:none;">
       <div class="modal-content">
         <span class="close" onclick="cerrarModal('materia')">&times;</span>
-        <h2>Agregar Materia</h2>
+        <h2>Agregar Asignatura</h2>
         <form id="formMateria">
-          <input type="text" name="nombre" placeholder="Nombre de la materia" required>
-          <button type="submit">Registrar</button>
+          <input type="text" name="nombre" placeholder="Nombre de la asignatura" required>
+          <button type="submit">Agregar asignatura</button>
         </form>
         <div id="mensajeMateria"></div>
       </div>
