@@ -20,6 +20,17 @@ body {
     transition: background-color 0.3s, background-image 0.3s, color 0.3s; /* Transición suave para el cambio de modo */
 }
 
+body.dark-mode h2,
+body.dark-mode .buscador-horarios h1 {
+  color: #fff !important;
+}
+body.dark-mode .buscador-horarios input::placeholder {
+  color: #eee !important;
+}
+body.dark-mode .buscador-horarios input {
+  color: #fff !important;
+}
+
 header {
     background-color: #002c59;
     padding: 10px;
