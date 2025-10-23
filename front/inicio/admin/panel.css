@@ -695,14 +695,16 @@ button:hover {
 
 .modal-content-horarios {
   background: white;
-  padding: 25px;
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-  width: 340px;
+  padding: 40px;
+  border-radius: 16px;
+  box-shadow: 0 6px 24px rgba(0,0,0,0.18);
+  width: 600px;
+  max-width: 900px;
+  min-height: 300px;
   position: relative;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 18px;
 }
 
 .modal-content-horarios input {

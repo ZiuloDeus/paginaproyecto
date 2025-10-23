@@ -73,8 +73,19 @@
     <span class="close-horarios" onclick="cerrarModal('horario')">&times;</span>
     <h2>Agregar horario</h2>
     <p id="mensajeHorario"></p>
-    <input type="text" placeholder="Ejemplo: Grupo A o Materia" />
-    <button type="button">Guardar</button>
+    <select id="selectGrupo" required>
+      <option value="">Seleccione grupo</option>
+    </select>
+    <select id="selectMateria" required>
+      <option value="">Seleccione materia</option>
+    </select>
+    <select id="selectProfesor" required>
+      <option value="">Seleccione profesor</option> 
+    </select>
+    <select id="selectHorario" required>
+      <option value="">Seleccione horario</option>
+    </select>
+    <button type="button" id="btnGuardarHorario">Guardar</button>
   </div>
 </div>
 
