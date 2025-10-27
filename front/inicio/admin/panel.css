@@ -347,6 +347,41 @@ tr:hover {
     background: white;
     border-radius: 8px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 20px;
+}
+
+#tablaMaterias {
+  width: 100%;
+  max-width: 100%;
+  margin-top: 20px;
+  border-collapse: collapse;
+  font-size: 16px;
+  background: #f9f9f9;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+#tablaMaterias th, #tablaMaterias td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: left;
+}
+
+#tablaMaterias th {
+  background: #002c59;
+  color: white;
+}
+
+#tablaMaterias tr:nth-child(even) {
+  background: #f2f2f2;
+}
+
+#tablaMaterias tr:hover {
+  background: #e8f4ff;
 }
 
 .texto h1 {

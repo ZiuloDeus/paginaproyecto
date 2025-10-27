@@ -409,3 +409,24 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 });
+
+function cargarMaterias() {
+  fetch('listar_materias.php')
+    .then(res => res.json())
+    .then(data => {
+      const tbody = document.querySelector('#tablaMaterias tbody');
+      if (!tbody) return;
+      tbody.innerHTML = '';
+      if (data.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="2">No hay materias registradas.</td></tr>';
+      } else {
+        data.forEach(m => {
+          tbody.innerHTML += `<tr><td>${m.id_materia}</td><td>${m.nombre}</td></tr>`;
+        });
+      }
+    });
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  cargarMaterias();
+});
