@@ -12,8 +12,8 @@
       <h2>Logo</h2>
     </div>
     <div name="derecha">
-      <p>Nombre del Admin</p>
       <img src="person-circle.svg" alt="Avatar" style="width:40px; height:40px; border-radius:50%;">
+      <button id="logout"> Cerrar Sesión</button>
     </div>
   </header>
 
@@ -47,17 +47,17 @@
       <h1>Buscar horario por grupo</h1>
       <input type="text" id="buscarGrupo" placeholder="Ingrese el nombre del grupo...">
       <ul id="resultados_gru"></ul>
-      <button id="btnAgregarHorario" type="button" onclick="abrirModal('horario')">Agregar horario</button>
+      <button id="add" type="button" onclick="abrirModal('horario')">Agregar horario</button>
      </div>
 
      <table id="tablaHorarios">
       <thead>
         <tr>
-          <th>Lunes</th>
-          <th>Martes</th>
-          <th>Miércoles</th>
-          <th>Jueves</th>
-          <th>Viernes</th>
+          <th id="th-lunes">Lunes</th>
+          <th id="th-martes">Martes</th>
+          <th id="th-miercoles">Miércoles</th>
+          <th id="th-jueves">Jueves</th>
+          <th id="th-viernes">Viernes</th>
         </tr>
       </thead>
      <tbody></tbody>
@@ -87,6 +87,7 @@
     </select>
     <button type="button" id="btnGuardarHorario">Guardar</button>
   </div>
+</div>
 </div>
 
 </body>

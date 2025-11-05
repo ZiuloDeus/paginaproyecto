@@ -10,12 +10,11 @@
 <body>
     <header>
         <div name="izquierda">
-            <img src="logo.png" alt="Logo" style="width:50px; height:50px;">
+            <h2>Logo</h2>
         </div>
         <div name="derecha">
-            <p>Nombre del Admin</p>
             <img src="person-circle.svg" alt="Avatar" style="width:40px; height:40px; border-radius:50%;">
-            <button id="logout"> Cerrar Sesión </button>
+            <button id="logout"> Cerrar Sesion </button>
         </div>
     </header>
     <div class="container">
@@ -27,11 +26,12 @@
                         <p>Horarios</p>
                     </li>
                     <li>
-                        <a href="aulas.html" ><img src="aula.png" alt="Aulas/etc"></a>
+                        <a href="aulas.html">
+                        <img src="aula.png" alt="Aulas/etc"></a>
                         <p>Salones/Aulas</p>
                     </li>
                     <li>
-                        <a href="recursos.html"><img src="recurso-educativo.png" alt="Recursos"></a>
+                        <a href="recursos.php"><img src="recurso-educativo.png" alt="Recursos"></a>
                         <p>Recursos</p>
                     </li>
                     <li onclick="showBox()">
@@ -44,19 +44,18 @@
         <main>
             <div class="botones">
                 <div>
-                    <a href="buscador_gru.html"><img src="people-fill.svg" alt="Grupos"><p>Grupos</p></a>
+                    <a href="buscador_gru.php"><img src="people-fill.svg" alt="Grupos"><p>Grupos</p></a>
                 </div>
                 <div>
-                    <a href="buscador_asi.html"><img src="libro-abierto.png" alt="Asignaturas"><p>Asignaturas</p></a>
+                    <a href="buscador_asignaturas.php"><img src="libro-abierto.png" alt="Asignaturas"><p>Asignaturas</p></a>
                 </div>
                 <div>
-                    <a href="buscador_pro.html"><img src="profesor-en-la-pizarra.png" alt="Profesores"><p>Profesores</p></a>  
+                    <a href="buscador_pro.php"><img src="profesor-en-la-pizarra.png" alt="Profesores"><p>Profesores</p></a>  
                 </div>
-                <div style="grid-area: e;"><h1>Asignar Usuarios</h1></div>
             </div>
         </main>
     </div> 
-    <script src="panel.js" defer></script>
-    <script src="../preferencias.js" defer></script>
+        <script src="panel.js" defer></script>
+        <script src="../preferencias.js" defer></script>
 </body>
 </html>

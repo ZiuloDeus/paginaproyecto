@@ -7,13 +7,6 @@ function toggleDarkMode() {
     applyDarkMode();
 }
 
-function changeLanguage() {
-  currentLang = currentLang === "es" ? "en" : "es";
-  localStorage.setItem('lang', currentLang);
-  updateTableHeaders();
-}
-
-
 function applyDarkMode() {
     if (isDarkMode) {
         document.body.style.backgroundColor = '#121212';
@@ -27,22 +20,29 @@ function applyDarkMode() {
     }
 }
 
+function changeLanguage() {
+    currentLang = currentLang === "es" ? "en" : "es";
+    localStorage.setItem('lang', currentLang);
+    updateTableHeaders();
+}
+
 document.addEventListener("DOMContentLoaded", () => {
-      // aplicar preferencias guardadas
-      applyDarkMode();
-      updateTableHeaders();
+    // aplicar preferencias guardadas
+    applyDarkMode();
+    updateTableHeaders();
 
     const logout = document.getElementById('logout');
 
     logout.addEventListener('click', () => {
         sessionStorage.clear(); // Limpiar datos de sesión
-        window.location.href = "../../inicio/index.html"; // redirigir a pagina de inicio de sesion
+        window.location.href = "../index.html"; // redirigir a pagina de inicio de sesion
     });
+
 
     window.showBox = function() {
         if (document.getElementById('overlay')) return;
 
-        const overlay = document.createElement('div');  
+        const overlay = document.createElement('div');
         overlay.id = 'overlay';
         overlay.onclick = closeBox;
 
@@ -59,6 +59,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const langButton = document.createElement('button');
         langButton.style.backgroundColor = '#1d3557';
         langButton.textContent = (currentLang === "es") ? "English" : "Español";
+        // Actualizar etiquetas al cambiar idioma
         langButton.onclick = () => {
             changeLanguage();
             updateModalLabels(darkModeButton, langButton, closeButton);
@@ -118,11 +119,6 @@ function updateTableHeaders() {
                 titleEl.innerText = data.title;
             }
 
-            const logout = document.querySelector('#logout');
-            if (logout && data.logout) {
-                logout.textContent = data.logout;
-            }
-
             // Tabla de horarios
             if (data.Lunes) document.getElementById('th-lunes').textContent = data.Lunes;
             if (data.Martes) document.getElementById('th-martes').textContent = data.Martes;
@@ -134,8 +130,8 @@ function updateTableHeaders() {
 }
 
 // buscador.js
-function setupBuscador(inputId, resultadosId, phpFile, mostrarCallback) {
-    const input = document.getElementById(inputId);
+function setupBuscador(id_materia, resultadosId, phpFile, mostrarCallback) {
+    const input = document.getElementById(id_materia);
     const resultados = document.getElementById(resultadosId);
 
     if (!input || !resultados) return;
@@ -155,278 +151,10 @@ function setupBuscador(inputId, resultadosId, phpFile, mostrarCallback) {
     });
 }
 
-  function abrirModal(tipo) {
-    if (tipo === 'grupo') {
-      var modalGrupo = document.getElementById('modalGrupo');
-      if (modalGrupo) modalGrupo.style.display = 'flex';
-    } else if (tipo === 'materia') {
-      var modalMateria = document.getElementById('modalMateria');
-      if (modalMateria) modalMateria.style.display = 'flex';
-    } else if (tipo === 'pro') {
-      var modalPro = document.getElementById('modalPro');
-      if (modalPro) modalPro.style.display = 'flex';
-    }
-    else if (tipo === 'horario') {
-      var modalPro = document.getElementById('modalHorario');
-      if (modalPro) modalPro.style.display = 'flex';
-    }
-  }
-  function cerrarModal(tipo) {
-    if (tipo === 'grupo') {
-      var modalGrupo = document.getElementById('modalGrupo');
-      if (modalGrupo) {
-        modalGrupo.style.display = 'none';
-        var mensajeGrupo = document.getElementById('mensajeGrupo');
-        if (mensajeGrupo) mensajeGrupo.innerText = '';
-      }
-    } else if (tipo === 'materia') {
-      var modalMateria = document.getElementById('modalMateria');
-      if (modalMateria) {
-        modalMateria.style.display = 'none';
-        var mensajeMateria = document.getElementById('mensajeMateria');
-        if (mensajeMateria) mensajeMateria.innerText = '';
-      }
-    } else if (tipo === 'pro') {
-      var modalPro = document.getElementById('modalPro');
-      if (modalPro) {
-        modalPro.style.display = 'none';
-        var mensajePro = document.getElementById('mensajePro');
-        if (mensajePro) mensajePro.innerText = '';
-      }
-    }
-    else if (tipo === 'horario') {
-      var modalPro = document.getElementById('modalHorario');
-      if (modalPro) {
-        modalPro.style.display = 'none';
-        var mensajePro = document.getElementById('mensajeHorario');
-        if (mensajePro) mensajePro.innerText = '';
-      }
-    }
-  }
-
-  // --- FORMULARIO MATERIA ---
-  document.addEventListener('DOMContentLoaded', function() {
-    const formMateria = document.getElementById('formMateria');
-    if (formMateria) {
-      formMateria.addEventListener('submit', function(e) {
-        e.preventDefault();
-        const nombre = this.nombre.value;
-        fetch("registrar_materia.php", {
-          method: 'POST',
-          headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-          body: 'nombre=' + encodeURIComponent(nombre)
-        })
-        .then(res => res.text())
-        .then(data => {
-          mostrarNotificacion(data, data.includes('correctamente') ? 'success' : 'error');
-          document.getElementById('mensajeMateria').innerText = data;
-          this.reset();
-        })
-        .catch(() => {
-          mostrarNotificacion('Error al conectar con el servidor.', 'error');
-          document.getElementById('mensajeMateria').innerText = 'Error al conectar con el servidor.';
-        });
-      });
-    }
-
-  // --- FORMULARIO GRUPO ---
-const formGrupo = document.getElementById('formGrupo');
-if (formGrupo) {
-  formGrupo.addEventListener('submit', function(e) {
-    e.preventDefault();
-
-    const nombre = this.nombre.value;
-
-    fetch("registrar_grupo.php", {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: 'nombre=' + encodeURIComponent(nombre)
-    })
-    .then(res => res.json())
-    .then(data => {
-      // Mostrar mensaje y notificación
-      document.getElementById('mensajeGrupo').innerText = data.message;
-      mostrarNotificacion(data.message, data.success ? 'success' : 'error');
-
-      if (data.success) {
-        this.reset();
-      }
-    })
-    .catch(() => {
-      mostrarNotificacion('Error al conectar con el servidor.', 'error');
-      document.getElementById('mensajeGrupo').innerText = 'Error al conectar con el servidor.';
-    });
-  });
-}
-
-  // --- FORMULARIO PROFESOR ---
-  const formPro = document.getElementById('formPro');
-  if (formPro) {
-    formPro.addEventListener('submit', function(e) {
-      e.preventDefault();
-      const nombre = this.nombre.value;
-      const apellido = this.apellido.value;
-      fetch("registrar_pro.php", {
-        method: 'POST',
-        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-        body: 'nombre=' + encodeURIComponent(nombre) + '&apellido=' + encodeURIComponent(apellido)
-      })
-      .then(res => res.text())
-      .then(data => {
-        mostrarNotificacion(data, data.includes('correctamente') ? 'success' : 'error');
-        document.getElementById('mensajePro').innerText = data;
-        this.reset();
-      })
-      .catch(() => {
-        mostrarNotificacion('Error al conectar con el servidor.', 'error');
-        document.getElementById('mensajePro').innerText = 'Error al conectar con el servidor.';
-      });
-    });
-  }
-});
-
-// --- Notificación flotante ---
-function mostrarNotificacion(mensaje, tipo) {
-  let notif = document.createElement('div');
-  notif.className = 'notificacion-flotante ' + tipo;
-  notif.innerText = mensaje;
-  document.body.appendChild(notif);
-  setTimeout(() => {
-    notif.remove();
-  }, 2500);
-}
-
-const tablas = ['tabla-aulas', 'tabla-salones'];
-
-tablas.forEach(id => {
-    const tabla = document.getElementById(id);
-    if (tabla) {
-        // Seleccionamos todas las celdas de la tabla
-        const celdas = tabla.getElementsByTagName('td');
-        for (let td of celdas) {
-            td.addEventListener('click', () => {
-                // Alterna clases verde/amarillo
-                if (td.classList.contains('verde')) {
-                    td.classList.remove('verde');
-                    td.classList.add('amarillo');
-                } else if (td.classList.contains('amarillo')) {
-                    td.classList.remove('amarillo');
-                    td.classList.add('verde');
-                } else {
-                    td.classList.add('verde'); // color inicial
-                }
-            });
-        }
-    }
-});
-
-// --- RECURSOS MODAL Y TABLA ---
-function estadoColor(estado) {
-  if (estado === 'disponible') return 'verde';
-  if (estado === 'pedido') return 'amarillo';
-  if (estado === 'averiado') return 'rojo';
-  return '';
-}
-function cargarRecursos() {
-  fetch('listar_recursos.php')
-    .then(res => res.json())
-    .then(data => {
-      const ul = document.getElementById('listaRecursos');
-      ul.innerHTML = '';
-      const tbody = document.querySelector('#tablaRecursos tbody');
-      tbody.innerHTML = '';
-      if (data.length === 0) {
-        ul.innerHTML = '<li>No hay recursos registrados.</li>';
-        tbody.innerHTML = '<tr><td colspan="3">No hay recursos registrados.</td></tr>';
-      } else {
-        data.forEach(r => {
-          ul.innerHTML += `<li>${r.tipo}</li>`;
-          let estado = r.estado || 'disponible';
-          let color = estadoColor(estado);
-          tbody.innerHTML += `<tr>
-            <td>${r.id_recurso}</td>
-            <td>${r.tipo}</td>
-            <td class="${color}" style="text-align:center;">${estado.charAt(0).toUpperCase() + estado.slice(1)}</td>
-          </tr>`;
-        });
-      }
-    });
-}
-window.cargarRecursos = cargarRecursos;
-
-document.addEventListener('DOMContentLoaded', function() {
-  cargarRecursos();
-  const btnAgregarRecurso = document.getElementById('btnAgregarRecurso');
-  if (btnAgregarRecurso) {
-    btnAgregarRecurso.addEventListener('click', function() {
-      document.getElementById('modalRecurso').style.display = 'flex';
-    });
-  }
-  const closeRecurso = document.getElementById('closeRecurso');
-  if (closeRecurso) {
-    closeRecurso.addEventListener('click', function(e) {
-      e.preventDefault();
-      document.getElementById('modalRecurso').style.display = 'none';
-      document.getElementById('mensajeRecurso').innerText = '';
-    });
-  }
-  const modalRecurso = document.getElementById('modalRecurso');
-  if (modalRecurso) {
-    modalRecurso.addEventListener('click', function(e) {
-      if (e.target === modalRecurso) {
-        document.getElementById('modalRecurso').style.display = 'none';
-        document.getElementById('mensajeRecurso').innerText = '';
-      }
-    });
-  }
-  const formRecurso = document.getElementById('formRecurso');
-  if (formRecurso) {
-    formRecurso.addEventListener('submit', function(e) {
-      e.preventDefault();
-      const id_recurso = this.id_recurso.value;
-      const tipo = this.tipo.value;
-      const estado = this.estado.value;
-      fetch('agregar_recurso.php', {
-        method: 'POST',
-        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-        body: 'id_recurso=' + encodeURIComponent(id_recurso) + '&tipo=' + encodeURIComponent(tipo) + '&estado=' + encodeURIComponent(estado)
-      })
-      .then(res => res.json())
-      .then(data => {
-        document.getElementById('mensajeRecurso').innerText = data.message;
-        if (data.success) {
-          this.reset();
-          cargarRecursos();
-          setTimeout(() => {
-            document.getElementById('modalRecurso').style.display = 'none';
-            document.getElementById('mensajeRecurso').innerText = '';
-          }, 1200);
-        }
-      })
-      .catch(() => {
-        document.getElementById('mensajeRecurso').innerText = 'Error al conectar con el servidor.';
-      });
-    });
-  }
-});
-
-function cargarMaterias() {
-  fetch('listar_materias.php')
-    .then(res => res.json())
-    .then(data => {
-      const tbody = document.querySelector('#tablaMaterias tbody');
-      if (!tbody) return;
-      tbody.innerHTML = '';
-      if (data.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="2">No hay materias registradas.</td></tr>';
-      } else {
-        data.forEach(m => {
-          tbody.innerHTML += `<tr><td>${m.id_materia}</td><td>${m.nombre}</td></tr>`;
-        });
-      }
-    });
-}
-
-document.addEventListener('DOMContentLoaded', function() {
-  cargarMaterias();
-});
+// Ejemplo de uso para grupos:
+setupBuscador(
+    'busqueda_gru',
+    'resultados_gru',
+    'buscador_grupos.php',
+    gru => gru.nombre
+);

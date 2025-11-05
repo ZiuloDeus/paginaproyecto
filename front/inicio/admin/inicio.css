@@ -1,108 +1,142 @@
 body {
-  background-image: url('itsp.jpg'); 
-  background-repeat: no-repeat;
-  background-size: cover;
-  font-family: 'Segoe UI', Arial, sans-serif;
+  margin: 0;
+padding: 0;
+background-image: url('itsp.jpg'); 
+background-repeat: no-repeat;
+background-size: cover;
+font-family: 'Segoe UI', Arial, sans-serif;
 }
+header {
+background-color: #002c59;
+padding: 10px;
+display: flex;
+justify-content: space-between;
+align-items: center;
+color: white;
+position: relative;
+z-index: 1;
+}
+header {
+  background-color: #002c59;
+  padding: 10px;
+  height: 10vh;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+}
+
+header div[name="izquierda"] {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+header div[name="derecha"] {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
 #Registro, #Login {
-  background: #f3d481;
-  border-radius: 10px;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
-  padding: 32px 24px;
-  margin: 40px auto;
-  max-width: 400px;
-  width: 100%;
-  box-sizing: border-box;
+background: #f3d481;
+border-radius: 10px;
+box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+padding: 32px 24px;
+margin: 40px auto;
+max-width: 400px;
+width: 100%;
+box-sizing: border-box;
 }
 #Registro h2, #Login h2 {
-  text-align: center;
-  color: #002C59;
-  margin-bottom: 24px;
+text-align: center;
+color: #002C59;
+margin-bottom: 24px;
 }
 #Registro label, #Login label {
-  display: block;
-  margin-bottom: 12px;
-  color: #8a3b08;
-  font-weight: 500;
+display: block;
+margin-bottom: 12px;
+color: #8a3b08;
+font-weight: 500;
 }
 #Registro input, #Login input {
-  width: 100%;
-  padding: 8px 10px;
-  margin-top: 4px;
-  border: 1px solid #b3c2e0;
-  border-radius: 5px;
-  font-size: 1em;
-  box-sizing: border-box;
-  transition: border-color 0.2s;
+width: 100%;
+padding: 8px 10px;
+margin-top: 4px;
+border: 1px solid #b3c2e0;
+border-radius: 5px;
+font-size: 1em;
+box-sizing: border-box;
+transition: border-color 0.2s;
 }
 #Registro input:focus, #Login input:focus {
-  border-color: #2a4d8f;
-  outline: none;
+border-color: #2a4d8f;
+outline: none;
 }
 #Registro button, #Login button {
-  width: 48%;
-  padding: 10px 0;
-  margin: 12px 1%;
-  border: none;
-  border-radius: 5px;
-  background: #ebdbc5;
-  color: #8a3b08;
-  font-size: 1em;
-  cursor: pointer;
-  transition: background 0.2s;
+width: 48%;
+padding: 10px 0;
+margin: 12px 1%;
+border: none;
+border-radius: 5px;
+background: #ebdbc5;
+color: #8a3b08;
+font-size: 1em;
+cursor: pointer;
+transition: background 0.2s;
 }
 #Registro button[type="button"], #Login button[type="button"] {
-  background: #8a3b08;
-  color: #ebdbc5;
+background: #8a3b08;
+color: #ebdbc5;
 }
 #Registro button:hover, #Login button:hover {
-  background: #ebdbc5;
+background: #ebdbc5;
 }
 #Registro button[type="button"]:hover, #Login button[type="button"]:hover {
-  background: #8a3b08;
+background: #8a3b08;
 }
 
 .loginMsg {
-  position: fixed;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  padding: 10px;
-  border-radius: 5px;
-  color: white;
-  display: inline-block;
+position: fixed;
+bottom: 20px;
+left: 50%;
+transform: translateX(-50%);
+padding: 10px;
+border-radius: 5px;
+color: white;
+display: inline-block;
 }
 
 .hidden {
-  display: none;
+display: none;
 }
- /*movil*/
+/*movil*/
 @media (max-width: 479px) {
-    .grid-container {
-      grid-template-columns: 1fr;
-      grid-template-areas:
-        "left"
-        "right-top"
-        "right-bottom";
-    }
+  .grid-container {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "left"
+      "right-top"
+      "right-bottom";
   }
-  
-  /*talet*/
-  @media (min-width: 480px) and (max-width: 768px) {
-    .grid-container {
-      grid-template-columns: 1fr 1fr;
-      grid-template-areas:
-        "left left"
-        "right-top right-bottom";
-    }
+}
+
+/*tablet*/
+@media (min-width: 480px) and (max-width: 768px) {
+  .grid-container {
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+      "left left"
+      "right-top right-bottom";
   }
-  
-  /*Compu*/
-  @media (min-width: 769px) {
-    .grid-container {
-      grid-template-columns: 25% 40%;
-      grid-template-areas:
-        "left right-top"
-        "left right-bottom";
-    }
+}
+
+/*Compu*/
+@media (min-width: 769px) {
+  .grid-container {
+    grid-template-columns: 25% 40%;
+    grid-template-areas:
+      "left right-top"
+      "left right-bottom";
   }
+}

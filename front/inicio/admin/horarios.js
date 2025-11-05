@@ -63,13 +63,6 @@ function cargarSelectsHorario() {
       selectGrupo.innerHTML = '<option value="">Seleccione grupo</option>' +
         data.map(g => `<option value="${g.id_grupo}">${g.nombre}</option>`).join('');
     });
-  fetch('listar_materias.php')
-    .then(res => res.json())
-    .then(data => {
-      const selectMateria = document.getElementById('selectMateria');
-      selectMateria.innerHTML = '<option value="">Seleccione materia</option>' +
-        data.map(m => `<option value="${m.id_materia}">${m.nombre}</option>`).join('');
-    });
   fetch('listar_profesores.php')
     .then(res => res.json())
     .then(data => {

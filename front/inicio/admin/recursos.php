@@ -1,3 +1,7 @@
+<?php
+require_once __DIR__.'/../../../back/conexion/conexion.php';
+$conn = conectar_bd();
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>

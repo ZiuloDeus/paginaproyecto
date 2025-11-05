@@ -1,9 +1,15 @@
+<?php
+require_once __DIR__.'/../../../back/conexion/conexion.php';
+$conn = conectar_bd();
+$sql = "SELECT nombre, grado FROM Grupos";
+$result = $conn->query($sql);
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista de Grupos</title>
+    <title>Panel de Administración</title>
     <link rel="stylesheet" href="panel.css">
     <link rel="icon" href="favicon.ico" type="image/x-icon">
 </head>
@@ -13,8 +19,8 @@
             <h2>Logo</h2>
         </div>
         <div name="derecha">
-            <p>Nombre del Admin</p>
             <img src="person-circle.svg" alt="Avatar" style="width:40px; height:40px; border-radius:50%;">
+            <button id="logout">Cerrar Sesion</button>
         </div>
     </header>
     <div class="container">
@@ -26,11 +32,12 @@
                         <p>Regresar</p>
                     </li>
                     <li>
-                        <img src="event-fill.svg" alt="Eventos">
+                         <a href="aulas.html">
+                        <img src="aula.png" alt="Aulas/etc"></a>
                         <p>Salones/Aulas</p>
                     </li>
                     <li>
-                        <img src="resources-fill.svg" alt="Recursos">
+                        <a href="recursos.php"><img src="recurso-educativo.png" alt="Recursos"></a>
                         <p>Recursos</p>
                     </li>
                     <li onclick="showBox()">
@@ -42,7 +49,24 @@
         </aside>
         <main>
             <div class="texto">
-                <button type="button" onclick="abrirModal('grupo')">Agregar grupo</button>
+                <h1>Lista de Grupos</h1>
+                
+                <!-- Lista de grupos -->
+                <div id="listaGrupos">
+                    <ul id="resultados_gru">
+                        <?php
+                        if ($result && $result->num_rows > 0) {
+                            while ($row = $result->fetch_assoc()) {
+                                echo "<li>" . htmlspecialchars($row['grado']) . " - " . htmlspecialchars($row['nombre']) . "</li>";    
+                            
+                            }
+                        } else {
+                            echo "<li>No hay grupos registrados.</li>";
+                        }
+                        ?>
+                    </ul>
+                    <button type="button" onclick="abrirModal('grupo')">Agregar grupo</button>
+                </div>
             </div>
         </main>
             </div> 
@@ -52,6 +76,7 @@
         <span class="close" onclick="cerrarModal('grupo')">&times;</span>
         <h2>Agregar Grupo</h2>
     <form id="formGrupo">
+        <input type="number" name="grado" placeholder="Grado del grupo" required>
        <input type="text" name="nombre" placeholder="Nombre del grupo" required>
        <button type="submit">Agregar grupo</button>
     </form>
@@ -60,16 +85,8 @@
 
       </div>
     </div>
-    <script>
-    function abrirModal() {
-      document.getElementById('modalGrupo').style.display = 'flex';
-    }
-    function cerrarModal() {
-      document.getElementById('modalGrupo').style.display = 'none';
-      document.getElementById('mensajeGrupo').innerText = '';
-    }
-    </script>
         <script src="panel.js" defer></script>
         <script src="../preferencias.js" defer></script>
 </body>
 </html>
+<?php $conn->close(); ?>
