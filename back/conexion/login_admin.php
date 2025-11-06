@@ -1,9 +1,8 @@
 <?php
 header('Content-Type: application/json');
-require_once '/../../../back/conexion/conexion.php'; 
+require_once '../../back/conexion/conexion.php'; // ✅ ruta correcta hacia conectar.php
 
-error_reporting(E_ALL); 
-ini_set('display_errors', 1);
+
 
 $conn = conectar_bd();
 

@@ -47,7 +47,7 @@
       <h1>Buscar horario por grupo</h1>
       <input type="text" id="buscarGrupo" placeholder="Ingrese el nombre del grupo...">
       <ul id="resultados_gru"></ul>
-      <button id="add" type="button" onclick="abrirModal('horario')">Agregar horario</button>
+      <button class="add" type="button" onclick="abrirModal('horario')">Agregar horario</button>
      </div>
 
      <table id="tablaHorarios">
@@ -71,7 +71,7 @@
   <div id="modalHorario" class="modal-horarios">
   <div class="modal-content-horarios">
     <span class="close-horarios" onclick="cerrarModal('horario')">&times;</span>
-    <h2>Agregar horario</h2>
+    <h2 class="add">Agregar horario</h2>
     <p id="mensajeHorario"></p>
     <select id="selectGrupo" required>
       <option value="">Seleccione grupo</option>

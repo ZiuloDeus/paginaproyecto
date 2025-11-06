@@ -64,7 +64,7 @@ $result = $conn->query($sql);
                         }
                         ?>
                     </ul>
-                    <button type="button" onclick="abrirModal('materia')">Agregar materia</button>
+                    <button class="add" type="button" onclick="abrirModal('materia')">Agregar materia</button>
                 </div>
             </div>
         </main>
@@ -73,10 +73,10 @@ $result = $conn->query($sql);
     <div id="modalMateria" class="modal" style="display:none;">
       <div class="modal-content">
         <span class="close" onclick="cerrarModal('materia')">&times;</span>
-        <h2>Agregar Materia</h2>
+        <h2 class="add">Agregar Materia</h2>
     <form id="formulario">
        <input type="text" name="nombre" placeholder="Nombre de la materia" required>
-       <button type="submit">Agregar materia</button>
+       <button class="add"type="submit">Agregar materia</button>
     </form>
 
 <div id="mensaje"></div>

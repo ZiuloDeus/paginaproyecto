@@ -1,20 +1,8 @@
-let currentLang = localStorage.getItem('lang') || 'es'; // cargar lenguaje guardado, si no hay uno usar español por defecto
-let isDarkMode = localStorage.getItem('darkMode') === "true"; // cargar modo oscuro o claro guardado
+let currentLang = "es";
+let isDarkMode = false;
 
 function toggleDarkMode() {
     isDarkMode = !isDarkMode;
-    localStorage.setItem('darkMode', isDarkMode);
-    applyDarkMode();
-}
-
-function changeLanguage() {
-    currentLang = currentLang === "es" ? "en" : "es";
-    localStorage.setItem('lang', currentLang);
-    updateTableHeaders();
-}
-
-
-function applyDarkMode() {
     if (isDarkMode) {
         document.body.style.backgroundColor = '#121212';
         document.body.style.backgroundImage = 'none';
@@ -28,9 +16,6 @@ function applyDarkMode() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-        // aplicar preferencias guardadas
-        applyDarkMode();
-        updateTableHeaders();
 
     window.showBox = function() {
         if (document.getElementById('overlay')) return;
@@ -53,7 +38,8 @@ document.addEventListener("DOMContentLoaded", () => {
         langButton.style.backgroundColor = '#1d3557';
         langButton.textContent = (currentLang === "es") ? "English" : "Español";
         langButton.onclick = () => {
-            changeLanguage();
+            currentLang = currentLang === "es" ? "en" : "es";
+            updateTableHeaders();
             updateModalLabels(darkModeButton, langButton, closeButton);
         };
 

@@ -1,6 +1,6 @@
 <?php
 header('Content-Type: application/json');
-require_once '/../../../back/conexion/conexion.php'; 
+require_once '/../../back/conexion/conexion.php'; 
 
 error_reporting(E_ALL); 
 ini_set('display_errors', 1);
@@ -16,7 +16,7 @@ if (empty($cedula) || empty($password)) {
     exit;
 }
 
-$sql = "SELECT * FROM administradores WHERE cedula = ?";
+$sql = "SELECT * FROM profesores WHERE cedula = ?";
 $stmt = mysqli_prepare($conn, $sql);
 mysqli_stmt_bind_param($stmt, 's', $cedula);
 mysqli_stmt_execute($stmt);

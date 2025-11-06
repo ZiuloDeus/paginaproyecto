@@ -1,15 +1,14 @@
 {
-  "sidebar": ["Schedules", "Classrooms", "Resources", "Settings"],
+  "sidebar": ["Schedules", "Classrooms", "Resources", "Settings", "Return"],
   "main": ["Groups", "Subjects", "Teachers"],
-  "title": ["Assign Users", "Search schedules by group", "Group list", "Subject list", "Professors list"],
+  "title": ["Assign Users", "Search Schedules by Group", "Group List", "Subject List", "Professors List", "Resource List"],
   "logout": "Log Out",
   "Lunes": "Monday",
   "Martes": "Tuesday",
   "Miércoles": "Wednesday",
   "Jueves": "Thursday",
   "Viernes": "Friday",
-  "add": ["Add schedule","Add resource", "Add group", "Add subject"],
-   "aulas": ["IT Classrooms", "Classroom 1", "Classroom 2", "Classroom 3"],
-  "salones": ["Normal Classrooms", "Classrooms 1", "Classrooms 2", "Classrooms 3", "Classroom 4", "Classroom 5"],
+  "add": ["Add schedule","Add resource", "Add group", "Add subject", "Add Professor"],
+  "salones": ["IT Classrooms", "Classroom 1", "Classroom 2", "Classroom 3", "Normal Classrooms", "Classrooms 1", "Classrooms 2", "Classrooms 3", "Classroom 4", "Classroom 5"],
   "table": ["Type", "Status", "Name", "Subject"]
 }

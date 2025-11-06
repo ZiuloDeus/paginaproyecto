@@ -1,5 +1,5 @@
 {
-"sesion": "Iniciar Sesion",
-"message": "Seleccione su rol:",
-"options": ["Profesor", "Administrador"]
-}
+    "sesion": "Iniciar Sesion",
+    "message": "Seleccione su rol:",
+    "options": ["Profesor", "Administrador"]
+    }

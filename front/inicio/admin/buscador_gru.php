@@ -65,7 +65,7 @@ $result = $conn->query($sql);
                         }
                         ?>
                     </ul>
-                    <button type="button" onclick="abrirModal('grupo')">Agregar grupo</button>
+                    <button class="add" type="button" onclick="abrirModal('grupo')">Agregar grupo</button>
                 </div>
             </div>
         </main>
@@ -74,11 +74,11 @@ $result = $conn->query($sql);
     <div id="modalGrupo" class="modal" style="display:none;">
       <div class="modal-content">
         <span class="close" onclick="cerrarModal('grupo')">&times;</span>
-        <h2>Agregar Grupo</h2>
+        <h2 class="add">Agregar Grupo</h2>
     <form id="formGrupo">
         <input type="number" name="grado" placeholder="Grado del grupo" required>
        <input type="text" name="nombre" placeholder="Nombre del grupo" required>
-       <button type="submit">Agregar grupo</button>
+       <button class="add" type="submit">Agregar grupo</button>
     </form>
 
 <div id="mensajeGrupo"></div>

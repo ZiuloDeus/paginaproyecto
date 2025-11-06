@@ -80,7 +80,7 @@ print_r($data);
           </tbody>
         </table>
 
-        <button id="btnAgregarProfe">Agregar Profesor</button>
+        <button class="add" id="btnAgregarProfe">Agregar Profesor</button>
         
       </div>
     </main>
@@ -90,7 +90,7 @@ print_r($data);
   <div id="modalAgregar" class="modal">
     <div class="modal-content">
       <span class="close">&times;</span>
-      <h2>Agregar Profesor</h2>
+      <h2 class="add">Agregar Profesor</h2>
       <input type="text" id="nombreProfe" placeholder="Nombre del profesor">
       <input type="text" id="materiaProfe" placeholder="Materia que dicta">
       <button id="guardarProfe">Guardar</button>

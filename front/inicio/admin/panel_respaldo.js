@@ -1,245 +1,167 @@
 let currentLang = localStorage.getItem('lang') || 'es'; // cargar lenguaje guardado, si no hay uno usar español por defecto
-let previousLang = currentLang === "es" ? "en" : "es";
 let isDarkMode = localStorage.getItem('darkMode') === "true"; // cargar modo oscuro o claro guardado
 
 function toggleDarkMode() {
-    isDarkMode = !isDarkMode;
-    localStorage.setItem('darkMode', isDarkMode);
-    applyDarkMode();
-}
-
-function applyDarkMode() {
-    if (isDarkMode) {
-        document.body.style.backgroundColor = '#121212';
-        document.body.style.backgroundImage = 'none';
-        document.body.style.color = '#ffffff';
-    } else {
-        document.body.style.backgroundColor = '#e5e5f7';
-        document.body.style.backgroundImage =
-            'linear-gradient(#444cf7 1px, transparent 1px), linear-gradient(to right, #444cf7 1px, #e5e5f7 1px)';
-        document.body.style.color = '#333';
-    }
+    isDarkMode = !isDarkMode;
+    localStorage.setItem('darkMode', isDarkMode);
+    applyDarkMode();
 }
 
 function changeLanguage() {
-    currentLang = currentLang === "es" ? "en" : "es";
-    previousLang = currentLang === "es" ? "en" : "es";
-    localStorage.setItem('lang', currentLang);
-    updateTableHeaders();
+  currentLang = currentLang === "es" ? "en" : "es";
+  localStorage.setItem('lang', currentLang);
+  updateTableHeaders();
+}
+
+
+function applyDarkMode() {
+    if (isDarkMode) {
+        document.body.style.backgroundColor = '#121212';
+        document.body.style.backgroundImage = 'none';
+        document.body.style.color = '#ffffff';
+    } else {
+        document.body.style.backgroundColor = '#e5e5f7';
+        document.body.style.backgroundImage =
+            'linear-gradient(#444cf7 1px, transparent 1px), linear-gradient(to right, #444cf7 1px, #e5e5f7 1px)';
+        document.body.style.color = '#333';
+    }
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-    // aplicar preferencias guardadas
-    applyDarkMode();
-    updateTableHeaders();
+      // aplicar preferencias guardadas
+      applyDarkMode();
+      updateTableHeaders();
 
-    const logout = document.getElementById('logout');
+    const logout = document.getElementById('logout');
 
-    logout.addEventListener('click', () => {
-        sessionStorage.clear(); // Limpiar datos de sesión
-        window.location.href = "../index.html"; // redirigir a pagina de inicio de sesion
-    });
+    logout.addEventListener('click', () => {
+        sessionStorage.clear(); // Limpiar datos de sesión
+        window.location.href = "../../inicio/index.html"; // redirigir a pagina de inicio de sesion
+    });
 
+    window.showBox = function() {
+        if (document.getElementById('overlay')) return;
 
-    window.showBox = function() {
-        if (document.getElementById('overlay')) return;
+        const overlay = document.createElement('div');   
+        overlay.id = 'overlay';
+        overlay.onclick = closeBox;
 
-        const overlay = document.createElement('div');
-        overlay.id = 'overlay';
-        overlay.onclick = closeBox;
+        const box = document.createElement('div');
+        box.id = 'customBox';
 
-        const box = document.createElement('div');
-        box.id = 'customBox';
+        // Botón "Modo oscuro"
+        const darkModeButton = document.createElement('button');
+        darkModeButton.style.backgroundColor = '#005f73';
+        darkModeButton.textContent = (currentLang === "es") ? "Modo oscuro" : "Dark mode";
+        darkModeButton.onclick = toggleDarkMode;
 
-        // Botón "Modo oscuro"
-        const darkModeButton = document.createElement('button');
-        darkModeButton.style.backgroundColor = '#005f73';
-        darkModeButton.textContent = (currentLang === "es") ? "Modo oscuro" : "Dark mode";
-        darkModeButton.onclick = toggleDarkMode;
+        // Botón "Cambiar idioma"
+        const langButton = document.createElement('button');
+        langButton.style.backgroundColor = '#1d3557';
+        langButton.textContent = (currentLang === "es") ? "English" : "Español";
+        langButton.onclick = () => {
+            changeLanguage();
+            updateModalLabels(darkModeButton, langButton, closeButton);
+        };
 
-        // Botón "Cambiar idioma"
-        const langButton = document.createElement('button');
-        langButton.style.backgroundColor = '#1d3557';
-        langButton.textContent = (currentLang === "es") ? "English" : "Español";
-        // Actualizar etiquetas al cambiar idioma
-        langButton.onclick = () => {
-            changeLanguage();
-            updateModalLabels(darkModeButton, langButton, closeButton);
-        };
+        // Botón "Cerrar"
+        const closeButton = document.createElement('button');
+        closeButton.style.backgroundColor = '#e63946';
+        closeButton.textContent = (currentLang === "es") ? "Cerrar" : "Close";
+        closeButton.onclick = closeBox;
 
-        // Botón "Cerrar"
-        const closeButton = document.createElement('button');
-        closeButton.style.backgroundColor = '#e63946';
-        closeButton.textContent = (currentLang === "es") ? "Cerrar" : "Close";
-        closeButton.onclick = closeBox;
+        function closeBox() {
+            overlay.remove();
+            box.remove();
+        }
 
-        function closeBox() {
-            overlay.remove();
-            box.remove();
-        }
+        function updateModalLabels(dmBtn, lBtn, cBtn) {
+            dmBtn.textContent = (currentLang === "es") ? "Modo oscuro" : "Dark mode";
+            lBtn.textContent = (currentLang === "es") ? "English" : "Español";
+            cBtn.textContent = (currentLang === "es") ? "Cerrar" : "Close";
+        }
 
-        function updateModalLabels(dmBtn, lBtn, cBtn) {
-            dmBtn.textContent = (currentLang === "es") ? "Modo oscuro" : "Dark mode";
-            lBtn.textContent = (currentLang === "es") ? "English" : "Español";
-            cBtn.textContent = (currentLang === "es") ? "Cerrar" : "Close";
-        }
+        box.appendChild(darkModeButton);
+        box.appendChild(langButton);
+        box.appendChild(closeButton);
 
-        box.appendChild(darkModeButton);
-        box.appendChild(langButton);
-        box.appendChild(closeButton);
+        document.body.appendChild(overlay);
+        document.body.appendChild(box);
+    };
 
-        document.body.appendChild(overlay);
-        document.body.appendChild(box);
-    };
-
-    updateTableHeaders(); // inicializar idioma al cargar
+    updateTableHeaders(); // inicializar idioma al cargar
 });
 
 function updateTableHeaders() {
-    let titleIndex = -1;
-   console.log(`Loading JSON file: ${previousLang}.json`);
-  fetch(`${previousLang}.json?cacheBust=${Date.now()}`)
-        .then(response => {
-          if (!response.ok) {
-            throw new Error("Error de HTTP, estado: ${response.status}")
-        }
-        return response.json();
-      })
-      .then(previousData => {
-        // Conseguir posición del título actual antes de cambiar el idioma
-        const title = document.querySelector('h1');
-        if (title && Array.isArray(previousData.title)) {
-          titleIndex = previousData.title.findIndex((t) => t === title.textContent);
-        }
-        
-            // Cargar el nuevo idioma
-                console.log(`Loading JSON file: ${currentLang}.json`);
-    fetch(`${currentLang}.json?cacheBust=${Date.now()}`)
-        .then(response => {
-          if (!response.ok) {
-            throw new Error("Error de HTTP, estado: ${response.status}")
-        }
-        return response.json();
-        })
-        .then(data => {
-            console.log('Loaded JSON data:', data);
+    fetch(currentLang + ".json")
+        .then(response => response.json())
+        .then(data => {
+            // Sidebar
+            const navItems = document.querySelectorAll("aside nav ul li p");
+            navItems.forEach((item, index) => {
+                if (data.sidebar && data.sidebar[index]) {
+                    item.innerText = data.sidebar[index];
+                }
+            });
+
+            // Main grid
+            const mainItems = document.querySelectorAll(".botones > div > a > p");
+            mainItems.forEach((item, index) => {
+                if (data.main && data.main[index]) {
+                    item.innerText = data.main[index];
+                }
+            });
+
+            // Title (Esto apunta al panel principal, lo dejamos)
+            const titleEl = document.querySelector('.botones div[style*="grid-area: e;"] h1');
+            if (titleEl && data.title) {
+                titleEl.innerText = data.title;
+            }
             
-            // Sidebar
-            const navItems = document.querySelectorAll("aside nav ul li p");
-            navItems.forEach((item) => {
-                if (item && Array.isArray(previousData.sidebar)) {
-        // Encontrar el index de cada elemento
-        const sidebarIndex = previousData.sidebar.findIndex((t) => t === item.textContent);
+            // Título de la página actual (Lista de Recursos)
+            const mainTitle = document.querySelector('main h1');
+            if (mainTitle && data.resourceListTitle) { // Asume que tienes resourceListTitle en tu JSON
+                mainTitle.textContent = data.resourceListTitle;
+            }
 
-        if (sidebarIndex !== -1 && Array.isArray(data.sidebar)) {
-            // Usar los index para traducir cada elemento
-            item.textContent = data.sidebar[sidebarIndex];
-        } else {
-            console.warn(`Sidebar item not found in the new language file: ${item.textContent}`);
-        }
-    }
-});
+            const logout = document.querySelector('#logout');
+            if (logout && data.logout) {
+                logout.textContent = data.logout;
+            }
 
-            // Main grid
-            const mainItems = document.querySelectorAll(".botones > div > a > p");
-            mainItems.forEach((item, index) => {
-                if (data.main && data.main[index]) {
-                    item.innerText = data.main[index];
-                }
-            });
-
-            // Tabla de horarios
-            if (document.getElementById('tablaHorarios')) {
-            if (data.Lunes) document.getElementById('th-lunes').textContent = data.Lunes;
-            if (data.Martes) document.getElementById('th-martes').textContent = data.Martes;
-            if (data['Miércoles']) document.getElementById('th-miercoles').textContent = data['Miércoles'];
-            if (data.Jueves) document.getElementById('th-jueves').textContent = data.Jueves;
-            if (data.Viernes) document.getElementById('th-viernes').textContent = data.Viernes;
-            }
-
-            //Cierre de sesion
-            if (logout && data.logout) {
-              logout.textContent = data.logout;
-              //Titulos
- if (titleIndex !== -1) {
-        if (Array.isArray(data.title) && data.title[titleIndex]) {
-          title.textContent = data.title[titleIndex];
-        } else {
-          console.warn('Titulo no encontrado en el nuevo archivo de idioma');
-        }
- }
-
-// Botones
-            const addItems = document.querySelectorAll(".add");
-            addItems.forEach((item) => {
-                if (item && Array.isArray(previousData.add)) {
-        // Encontrar el index de cada elemento
-        const addIndex = previousData.add.findIndex((t) => t === item.textContent);
-
-        if (addIndex !== -1 && Array.isArray(data.add)) {
-            // Usar los index para traducir cada elemento
-            item.textContent = data.add[addIndex];
-        } else {
-            console.warn(`Item not found in the new language file: ${item.textContent}`);
-        }
-    }
-});
-
-// Tabla
-            const tableItems = document.querySelectorAll("th");
-            tableItems.forEach((item) => {
-                if (item && Array.isArray(previousData.table)) {
-        // Encontrar el index de cada elemento
-        const tableIndex = previousData.table.findIndex((t) => t === item.textContent);
-
-        if (tableIndex !== -1 && Array.isArray(data.table)) {
-            // Usar los index para traducir cada elemento
-            item.textContent = data.table[tableIndex];
-        } else {
-            console.warn(`Table item not found in the new language file: ${item.textContent}`);
-        }
-    }
-});
- 
-      }
-    })
-
-        .catch(err => console.error("Error loading JSON:", err));
-      })
-      .catch(err => console.error ("Error loading JSON:", err));
-    }
-
-// buscador.js
-function setupBuscador(id_materia, resultadosId, phpFile, mostrarCallback) {
-    const input = document.getElementById(id_materia);
-    const resultados = document.getElementById(resultadosId);
-
-    if (!input || !resultados) return;
-
-    input.addEventListener('input', function() {
-        const q = this.value;
-        fetch(`${phpFile}?q=${encodeURIComponent(q)}`)
-            .then(res => res.json())
-            .then(data => {
-                resultados.innerHTML = '';
-                data.forEach(item => {
-                    const li = document.createElement('li');
-                    li.textContent = mostrarCallback(item);
-                    resultados.appendChild(li);
-                });
-            });
-    });
+            // Tabla de horarios
+            if (data.Lunes) document.getElementById('th-lunes').textContent = data.Lunes;
+            if (data.Martes) document.getElementById('th-martes').textContent = data.Martes;
+            if (data['Miércoles']) document.getElementById('th-miercoles').textContent = data['Miércoles'];
+            if (data.Jueves) document.getElementById('th-jueves').textContent = data.Jueves;
+            if (data.Viernes) document.getElementById('th-viernes').textContent = data.Viernes;
+        })
+        .catch(err => console.error("Error loading JSON:", err));
 }
 
-// Ejemplo de uso para grupos:
-setupBuscador(
-    'busqueda_gru',
-    'resultados_gru',
-    'buscador_grupos.php',
-    gru => gru.nombre
-);
+// buscador.js
+function setupBuscador(inputId, resultadosId, phpFile, mostrarCallback) {
+    const input = document.getElementById(inputId);
+    const resultados = document.getElementById(resultadosId);
 
-function abrirModal(tipo) {
+    if (!input || !resultados) return;
+
+    input.addEventListener('input', function() {
+        const q = this.value;
+        fetch(`${phpFile}?q=${encodeURIComponent(q)}`)
+            .then(res => res.json())
+            .then(data => {
+                resultados.innerHTML = '';
+                data.forEach(item => {
+                    const li = document.createElement('li');
+                    li.textContent = mostrarCallback(item);
+                    resultados.appendChild(li);
+                });
+            });
+    });
+}
+
+  function abrirModal(tipo) {
     if (tipo === 'grupo') {
       var modalGrupo = document.getElementById('modalGrupo');
       if (modalGrupo) modalGrupo.style.display = 'flex';
@@ -482,48 +404,48 @@ document.addEventListener('DOMContentLoaded', function() {
       // USAR RUTA SIMPLE (asumiendo que el archivo fue movido) y ENVIAR CLAVES EN MINÚSCULAS
       fetch('agregar_recurso.php', {
         method: 'POST',
-    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-    // Claves POST en minúsculas para que el PHP las reciba como $_POST['tipo']
-    body: 'id_recurso=' + encodeURIComponent(id_recurso) + 
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        // Claves POST en minúsculas para que el PHP las reciba como $_POST['tipo']
+        body: 'id_recurso=' + encodeURIComponent(id_recurso) + 
                  '&tipo=' + encodeURIComponent(tipo) + 
                  '&estado=' + encodeURIComponent(estado)
-        })
-        .then(res => res.json())
-        .then(data => {
-        document.getElementById('mensajeRecurso').innerText = data.message;
-        if (data.success) {
-            this.reset();
-        cargarRecursos();
-        setTimeout(() => {
-            document.getElementById('modalRecurso').style.display = 'none';
-            document.getElementById('mensajeRecurso').innerText = '';
-            }, 1200);
-    }
-    })
-    .catch(() => {
-     document.getElementById('mensajeRecurso').innerText = 'Error al conectar con el servidor.';
-     });
-    });
- }
+      })
+      .then(res => res.json())
+      .then(data => {
+        document.getElementById('mensajeRecurso').innerText = data.message;
+        if (data.success) {
+          this.reset();
+          cargarRecursos();
+          setTimeout(() => {
+            document.getElementById('modalRecurso').style.display = 'none';
+            document.getElementById('mensajeRecurso').innerText = '';
+          }, 1200);
+        }
+      })
+      .catch(() => {
+        document.getElementById('mensajeRecurso').innerText = 'Error al conectar con el servidor.';
+      });
+    });
+  }
 });
 
 function cargarMaterias() {
-    fetch('listar_materias.php')
-    .then(res => res.json())
-    .then(data => {
-    const tbody = document.querySelector('#tablaMaterias tbody');
-    if (!tbody) return;
-    tbody.innerHTML = '';
-    if (data.length === 0) {
-    tbody.innerHTML = '<tr><td colspan="2">No hay materias registradas.</td></tr>';
-    } else {
-    data.forEach(m => {
-    tbody.innerHTML += `<tr><td>${m.id_materia}</td><td>${m.nombre}</td></tr>`;
-        });
-    }
-    });
+  fetch('listar_materias.php')
+    .then(res => res.json())
+    .then(data => {
+      const tbody = document.querySelector('#tablaMaterias tbody');
+      if (!tbody) return;
+      tbody.innerHTML = '';
+      if (data.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="2">No hay materias registradas.</td></tr>';
+      } else {
+        data.forEach(m => {
+          tbody.innerHTML += `<tr><td>${m.id_materia}</td><td>${m.nombre}</td></tr>`;
+        });
+      }
+    });
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-    cargarMaterias();
+  cargarMaterias();
 });

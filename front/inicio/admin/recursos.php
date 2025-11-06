@@ -44,7 +44,7 @@ $conn = conectar_bd();
       <div class="texto" style="display: flex; flex-direction: column; align-items: center; width: 100%; max-width: 700px;">
         <h1>Lista de Recursos</h1>
         <ul id="listaRecursos" style="width:100%;"></ul>
-        <button type="button" id="btnAgregarRecurso">Agregar recurso</button>
+        <button class="add" type="button" id="btnAgregarRecurso">Agregar recurso</button>
         <table id="tablaRecursos" style="width:100%;margin-top:20px; text-align:center;">
           <thead>
             <tr>
@@ -61,7 +61,7 @@ $conn = conectar_bd();
   <div id="modalRecurso" class="modal" style="display:none;">
     <div class="modal-content">
       <span class="close" id="closeRecurso">&times;</span>
-      <h2>Agregar Recurso</h2>
+      <h2 class="add">Agregar Recurso</h2>
       <form id="formRecurso">
         <input type="number" name="id_recurso" placeholder="ID de recurso" required>
         <input type="text" name="Tipo" placeholder="Tipo de recurso" required>
@@ -70,7 +70,7 @@ $conn = conectar_bd();
           <option value="pedido">Pedido</option>
           <option value="averiado">Averiado</option>
         </select>
-        <button type="submit">Agregar recurso</button>
+        <button class="add" type="submit">Agregar recurso</button>
       </form>
       <div id="mensajeRecurso"></div>
     </div>

@@ -32,14 +32,6 @@ document.addEventListener("DOMContentLoaded", () => {
         applyDarkMode();
         updateTableHeaders();
 
-    const logout = document.getElementById('logout');
-
-    logout.addEventListener('click', () => {
-        sessionStorage.clear(); // Limpiar datos de sesión
-        window.location.href = "../../inicio/menu.html"; // redirigir a pagina de inicio de sesion
-    });
-
-
     window.showBox = function() {
         if (document.getElementById('overlay')) return;
 
@@ -94,16 +86,49 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 function updateTableHeaders() {
-    fetch(currentLang + ".json")
-        .then(response => response.json())
+    let titleIndex = -1;
+   console.log(`Loading JSON file: ${previousLang}.json`);
+  fetch(`${previousLang}.json?cacheBust=${Date.now()}`)
+        .then(response => {
+          if (!response.ok) {
+            throw new Error("Error de HTTP, estado: ${response.status}")
+        }
+        return response.json();
+      })
+      .then(previousData => {
+        // Conseguir posición del título actual antes de cambiar el idioma
+        const title = document.querySelector('h1');
+        if (title && Array.isArray(previousData.title)) {
+          titleIndex = previousData.title.findIndex((t) => t === title.textContent);
+        }
+        
+            // Cargar el nuevo idioma
+                console.log(`Loading JSON file: ${currentLang}.json`);
+    fetch(`${currentLang}.json?cacheBust=${Date.now()}`)
+        .then(response => {
+          if (!response.ok) {
+            throw new Error("Error de HTTP, estado: ${response.status}")
+        }
+        return response.json();
+        })
         .then(data => {
+            console.log('Loaded JSON data:', data);
+            
             // Sidebar
             const navItems = document.querySelectorAll("aside nav ul li p");
-            navItems.forEach((item, index) => {
-                if (data.sidebar && data.sidebar[index]) {
-                    item.innerText = data.sidebar[index];
-                }
-            });
+            navItems.forEach((item) => {
+                if (item && Array.isArray(previousData.sidebar)) {
+        // Encontrar el index de cada elemento
+        const sidebarIndex = previousData.sidebar.findIndex((t) => t === item.textContent);
+
+        if (sidebarIndex !== -1 && Array.isArray(data.sidebar)) {
+            // Usar los index para traducir cada elemento
+            item.textContent = data.sidebar[sidebarIndex];
+        } else {
+            console.warn(`Sidebar item not found in the new language file: ${item.textContent}`);
+        }
+    }
+});
 
             // Main grid
             const mainItems = document.querySelectorAll(".botones > div > a > p");
@@ -113,22 +138,66 @@ function updateTableHeaders() {
                 }
             });
 
-            // Title
-            const titleEl = document.querySelector('.botones div[style*="grid-area: e;"] h1');
-            if (titleEl && data.title) {
-                titleEl.innerText = data.title;
-            }
-
             // Tabla de horarios
+            if (document.getElementById('tablaHorarios')) {
             if (data.Lunes) document.getElementById('th-lunes').textContent = data.Lunes;
             if (data.Martes) document.getElementById('th-martes').textContent = data.Martes;
             if (data['Miércoles']) document.getElementById('th-miercoles').textContent = data['Miércoles'];
             if (data.Jueves) document.getElementById('th-jueves').textContent = data.Jueves;
             if (data.Viernes) document.getElementById('th-viernes').textContent = data.Viernes;
-        })
-        .catch(err => console.error("Error loading JSON:", err));
-}
+            }
 
+            //Cierre de sesion
+            if (logout && data.logout) {
+              logout.textContent = data.logout;
+              //Titulos
+ if (titleIndex !== -1) {
+        if (Array.isArray(data.title) && data.title[titleIndex]) {
+          title.textContent = data.title[titleIndex];
+        } else {
+          console.warn('Titulo no encontrado en el nuevo archivo de idioma');
+        }
+ }
+
+// Botones
+            const addItems = document.querySelectorAll(".add");
+            addItems.forEach((item) => {
+                if (item && Array.isArray(previousData.add)) {
+        // Encontrar el index de cada elemento
+        const addIndex = previousData.add.findIndex((t) => t === item.textContent);
+
+        if (addIndex !== -1 && Array.isArray(data.add)) {
+            // Usar los index para traducir cada elemento
+            item.textContent = data.add[addIndex];
+        } else {
+            console.warn(`Item not found in the new language file: ${item.textContent}`);
+        }
+    }
+});
+
+// Tabla
+            const tableItems = document.querySelectorAll("th");
+            tableItems.forEach((item) => {
+                if (item && Array.isArray(previousData.table)) {
+        // Encontrar el index de cada elemento
+        const tableIndex = previousData.table.findIndex((t) => t === item.textContent);
+
+        if (tableIndex !== -1 && Array.isArray(data.table)) {
+            // Usar los index para traducir cada elemento
+            item.textContent = data.table[tableIndex];
+        } else {
+            console.warn(`Table item not found in the new language file: ${item.textContent}`);
+        }
+    }
+});
+ 
+      }
+    })
+
+        .catch(err => console.error("Error loading JSON:", err));
+      })
+      .catch(err => console.error ("Error loading JSON:", err));
+    }
 // buscador.js
 function setupBuscador(inputId, resultadosId, phpFile, mostrarCallback) {
     const input = document.getElementById(inputId);

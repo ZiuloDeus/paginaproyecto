@@ -42,7 +42,7 @@
         </aside>
         <main>
             <div class="texto">
-                <button type="button" onclick="abrirModal('materia')">Agregar asignatura</button>
+                <button class="add" type="button" onclick="abrirModal('materia')">Agregar asignatura</button>
                 <table id="tablaMaterias">
                     <thead>
                         <tr>
@@ -58,10 +58,10 @@
     <div id="modalMateria" class="modal" style="display:none;">
       <div class="modal-content">
         <span class="close" onclick="cerrarModal('materia')">&times;</span>
-        <h2>Agregar Asignatura</h2>
+        <h2 class="add">Agregar Asignatura</h2>
         <form id="formMateria">
           <input type="text" name="nombre" placeholder="Nombre de la asignatura" required>
-          <button type="submit">Agregar asignatura</button>
+          <button class="add" type="submit">Agregar asignatura</button>
         </form>
         <div id="mensajeMateria"></div>
       </div>

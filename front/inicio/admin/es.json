@@ -1,15 +1,14 @@
 {
-  "sidebar": ["Horarios", "Salones/aulas", "Recursos", "Configuración"],
+  "sidebar": ["Horarios", "Salones/Aulas", "Recursos", "Configuración", "Regresar"],
   "main": ["Grupos", "Asignaturas", "Profesores"],
-  "title": ["Asignar Usuarios","Buscar horario por grupo", "Lista de Grupos", "Lista de Materias", "Lista de Profesores"],
+  "title": ["Asignar Usuarios","Buscar horario por grupo", "Lista de Grupos", "Lista de Materias", "Lista de Profesores", "Lista de Recursos"],
   "logout": "Cerrar Sesion",
   "Lunes": "Lunes",
   "Martes": "Martes",
   "Miércoles": "Miércoles",
   "Jueves": "Jueves",
   "Viernes": "Viernes",
-  "add": ["Agregar horario","Agregar recurso", "Agregar grupo", "Agregar materia"],
-  "aulas": ["Aulas", "Aula 1", "Aula 2", "Aula 3"],
-  "salones": ["Salones", "Salón 1", "Salón 2", "Salón 3", "Salón 4", "Salón 5"],
+  "add": ["Agregar horario","Agregar recurso", "Agregar grupo", "Agregar materia", "Agregar Profesor"],
+  "salones": ["Aulas", "Aula 1", "Aula 2", "Aula 3", "Salones", "Salón 1", "Salón 2", "Salón 3", "Salón 4", "Salón 5"],
   "table": ["Tipo", "Estado", "Nombre", "Materia"]
 }

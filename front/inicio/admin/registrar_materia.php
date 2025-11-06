@@ -10,16 +10,17 @@ $conn = conectar_bd();
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Recuperar el nombre desde el POST, si está vacío usa un valor por defecto
     $nombre = isset($_POST['nombre']) ? trim($_POST['nombre']) : '';
+    $grado = isset($_POST['grado']) ? trim($_POST['grado']) : '';
 
     if (!empty($nombre)) {
         // Preparar la consulta SQL
-        $sql = "INSERT INTO Materias (nombre) VALUES (?)";
+        $sql = "INSERT INTO Materias (nombre, grado) VALUES (?,?)";
         $stmt = mysqli_prepare($conn, $sql);
 
         // Verificar si la consulta se preparó correctamente
         if ($stmt) {
             // Vincular el parámetro de entrada
-            mysqli_stmt_bind_param($stmt, "s", $nombre);
+            mysqli_stmt_bind_param($stmt, "si", $nombre, $grado);
 
             // Ejecutar la consulta
             if (mysqli_stmt_execute($stmt)) {

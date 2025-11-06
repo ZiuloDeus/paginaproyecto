@@ -1,5 +1,5 @@
 <?php
-require_once dirname(__FILE__).'/../conexion/conexion.php';
+require_once __DIR__.'/../conexion/conexion.php';
 $conn = conectar_bd();
 header('Content-Type: application/json');
 
